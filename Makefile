@@ -6,13 +6,13 @@
 #    By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/27 20:03:27 by atamas            #+#    #+#              #
-#    Updated: 2024/10/27 22:06:16 by atamas           ###   ########.fr        #
+#    Updated: 2024/10/28 08:47:50 by atamas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CFLAGS = -Wall -Werror -Wextra
-SRC = 
+SRC = mlx.c
 OBJ = $(SRC:.c=.o)
 MLX_DIR = ./minilibx
 MLX = $(MLX_DIR)/libmlx.a
