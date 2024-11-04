@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/01 15:47:40 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/04 15:30:57 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-
 void	my_mlx_pixel_put(t_struct *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void	clear_screen(t_struct *mlx)
@@ -46,46 +45,65 @@ void	clear_screen(t_struct *mlx)
 	}
 }
 
-void draw_square(int size, int x, int y, int color, t_struct *game)
+void	draw_square(int size, int x, int y, int color, t_struct *game)
 {
-    for(int i = 0; i < size; i++)
-        my_mlx_pixel_put(game, x + i, y, color);
-    for(int i = 0; i < size; i++)
-        my_mlx_pixel_put(game, x, y + i, color);
-    for(int i = 0; i < size; i++)
-        my_mlx_pixel_put(game, x + size, y + i, color);
-    for(int i = 0; i < size; i++)
-        my_mlx_pixel_put(game, x + i, y + size, color);
+	for(int i = 0; i < size; i++)
+		my_mlx_pixel_put(game, x + i, y, color);
+	for(int i = 0; i < size; i++)
+		my_mlx_pixel_put(game, x, y + i, color);
+	for(int i = 0; i < size; i++)
+		my_mlx_pixel_put(game, x + size, y + i, color);
+	for(int i = 0; i < size; i++)
+		my_mlx_pixel_put(game, x + i, y + size, color);
+}
+
+void	draw_line(t_struct *mlx, int x0, int y0, int x1, int y1, int color)
+{
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = x0 < x1 ? 1 : -1;
+	int sy = y0 < y1 ? 1 : -1;
+	int err = (dx > dy ? dx : -dy) / 2;
+	int e2;
+
+	while (1)
+	{
+		if (x0 >= 0 && x0 < SCREEN_X && y0 >= 0 && y0 < SCREEN_Y)
+			my_mlx_pixel_put(mlx, x0, y0, color);
+		if (x0 == x1 && y0 == y1)
+			break;
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
 }
 
 void	draw_triangle(int size, int x, int y, int color, t_struct *mlx)
 {
-	int	i;
-	int	start_x;
-	int	end_x;
-	int	height;
-	int	j;
+	double	angle = atan2(mlx->dir_y, mlx->dir_x);
+	double	half_base = size / 2.0;
+	double	height = size * 1.5;
 
-	i = 0;
-	start_x = 0;
-	end_x = 0;
-	height = 0;
-	j = 0;
-	y = y - size / 2;
-	height = (int)(size * sin((85) * PI / 180.0));
-	while (i < height)
-	{
-		start_x = x - (i * size) / height / 2;
-		end_x = x + (i * size) / height / 2;
-		j = start_x;
-		while (j <= end_x)
-		{
-			if (j >= 0 && j < SCREEN_X && (y + i) >= 0 && (y + i) < SCREEN_Y)
-				my_mlx_pixel_put(mlx, j, y + i, color);
-			j++;
-		}
-		i++;
-	}
+	// Calculate the vertices of the triangle
+	int v1_x = x + height * cos(angle);
+	int v1_y = y + height * sin(angle);
+	int v2_x = x - half_base * cos(angle + PI / 2);
+	int v2_y = y - half_base * sin(angle + PI / 2);
+	int v3_x = x + half_base * cos(angle + PI / 2);
+	int v3_y = y + half_base * sin(angle + PI / 2);
+
+	// Draw lines between the vertices
+	draw_line(mlx, v1_x, v1_y, v2_x, v2_y, color);
+	draw_line(mlx, v2_x, v2_y, v3_x, v3_y, color);
+	draw_line(mlx, v3_x, v3_y, v1_x, v1_y, color);
 }
 
 int	clean_exit(t_struct *mlx)
@@ -99,66 +117,60 @@ int	clean_exit(t_struct *mlx)
 
 int	event_handler(int keycode, t_struct *mlx)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dir_x;
+	double	old_plane_x;
+	double	rotate_speed_rad;
+
 	if (keycode == KEY_ESC)
 	{
 		clean_exit(mlx);
 	}
 	if (keycode == KEY_A)
 	{
-		mlx->player_x -= mlx->move_speed;
-		clear_screen(mlx);
-		draw_square(50, mlx->player_x, mlx->player_y, RED, mlx);
-		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+		mlx->player_x -= mlx->plane_x * mlx->move_speed;
+		mlx->player_y -= mlx->plane_y * mlx->move_speed;
 	}
 	if (keycode == KEY_D)
 	{
-		mlx->player_x += mlx->move_speed;
-		// mlx->player_y += 1;
-		clear_screen(mlx);
-		draw_square(50, mlx->player_x, mlx->player_y, RED, mlx);
-		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+		mlx->player_x += mlx->plane_x * mlx->move_speed;
+		mlx->player_y += mlx->plane_y * mlx->move_speed;
 	}
 	if (keycode == KEY_W)
 	{
 		mlx->player_x += mlx->dir_x * mlx->move_speed;
 		mlx->player_y += mlx->dir_y * mlx->move_speed;
-		clear_screen(mlx);
-		draw_square(50, mlx->player_x, mlx->player_y, RED, mlx);
-		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	}
 	if (keycode == KEY_S)
 	{
 		mlx->player_x -= mlx->dir_x * mlx->move_speed;
 		mlx->player_y -= mlx->dir_y * mlx->move_speed;
-		clear_screen(mlx);
-		draw_square(50, mlx->player_x, mlx->player_y, RED, mlx);
-		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
-	}
-	if (keycode == KEY_RIGHT)
-	{
-		oldDirX = mlx->dir_x;
-		mlx->dir_x = mlx->dir_x * cos(-mlx->rotate_speed) - mlx->dir_y * sin(-mlx->rotate_speed);
-		mlx->dir_y = oldDirX * sin(-mlx->rotate_speed) + mlx->dir_y * cos(-mlx->rotate_speed);
-		oldPlaneX = mlx->plane_x;
-		mlx->plane_x = mlx->plane_x * cos(-mlx->rotate_speed) - mlx->plane_y * sin(-mlx->rotate_speed);
-		mlx->plane_y = oldPlaneX * sin(-mlx->rotate_speed) + mlx->plane_y * cos(-mlx->rotate_speed);
-		printf("dir_x: %f, dir_y: %f\n", mlx->dir_x, mlx->dir_y);
 	}
 	if (keycode == KEY_LEFT)
 	{
-		oldDirX = mlx->dir_x;
-		mlx->dir_x = mlx->dir_x * cos(mlx->rotate_speed) - mlx->dir_y * sin(mlx->rotate_speed);
-		mlx->dir_y = oldDirX * sin(mlx->rotate_speed) + mlx->dir_y * cos(mlx->rotate_speed);
-		oldPlaneX = mlx->plane_x;
-		mlx->plane_x = mlx->plane_x * cos(mlx->rotate_speed) - mlx->plane_y * sin(mlx->rotate_speed);
-		mlx->plane_y = oldPlaneX * sin(mlx->rotate_speed) + mlx->plane_y * cos(mlx->rotate_speed);
-		printf("dir_x: %f, dir_y: %f\n", mlx->dir_x, mlx->dir_y);
+		rotate_speed_rad = mlx->rotate_speed * PI / 180.0;
+		old_dir_x = mlx->dir_x;
+		mlx->dir_x = mlx->dir_x * cos(-rotate_speed_rad) - mlx->dir_y * sin(-rotate_speed_rad);
+		mlx->dir_y = old_dir_x * sin(-rotate_speed_rad) + mlx->dir_y * cos(-rotate_speed_rad);
+		old_plane_x = mlx->plane_x;
+		mlx->plane_x = mlx->plane_x * cos(-rotate_speed_rad) - mlx->plane_y * sin(-rotate_speed_rad);
+		mlx->plane_y = old_plane_x * sin(-rotate_speed_rad) + mlx->plane_y * cos(-rotate_speed_rad);
 	}
+	if (keycode == KEY_RIGHT)
+	{
+		rotate_speed_rad = mlx->rotate_speed * PI / 180.0;
+		old_dir_x = mlx->dir_x;
+		mlx->dir_x = mlx->dir_x * cos(rotate_speed_rad) - mlx->dir_y * sin(rotate_speed_rad);
+		mlx->dir_y = old_dir_x * sin(rotate_speed_rad) + mlx->dir_y * cos(rotate_speed_rad);
+		old_plane_x = mlx->plane_x;
+		mlx->plane_x = mlx->plane_x * cos(rotate_speed_rad) - mlx->plane_y * sin(rotate_speed_rad);
+		mlx->plane_y = old_plane_x * sin(rotate_speed_rad) + mlx->plane_y * cos(rotate_speed_rad);
+	}
+	clear_screen(mlx);
+	draw_triangle(25, mlx->player_x, mlx->player_y, RED, mlx);
+	// draw_square(50, mlx->player_x, mlx->player_y, RED, mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	return (0);
 }
-
 
 int	mouse_move(int x, int y, t_struct *mlx)
 {
@@ -190,16 +202,17 @@ int	main(void)
 
 	mlx.player_x = SCREEN_X / 2;
 	mlx.player_y = SCREEN_Y / 2;
-	mlx.dir_x = -1;
-	mlx.dir_y = 0;
-	mlx.plane_x = 0;
-	mlx.plane_y = 0.66;
+	mlx.dir_x = 0;
+	mlx.dir_y = -1;
+	mlx.plane_x = 0.66;
+	mlx.plane_y = 0;
 	mlx.move_speed = 5;
 	mlx.rotate_speed = 3;
 	// set which box in the map are we in
 	if (mlx_setup(&mlx))
 		return (1);
-	draw_square(50, mlx.player_x, mlx.player_y, RED, &mlx);
+	draw_triangle(25, mlx.player_x, mlx.player_y, RED, &mlx);
+	// draw_square(50, mlx.player_x, mlx.player_y, RED, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	clean_exit(&mlx);
