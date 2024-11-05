@@ -6,15 +6,20 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/01 15:12:11 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/05 13:24:21 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define SCREEN_X 3840 / 2
-# define SCREEN_Y 2160 / 2
+# include <stdlib.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdbool.h>
+
+# define SCREEN_X 1024
+# define SCREEN_Y 720
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -32,7 +37,7 @@ typedef struct s_struct
 
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		b_p_p;
 	int		line_length;
 	int		endian;
 	double	player_x;
@@ -41,6 +46,7 @@ typedef struct s_struct
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	//
 	double	camera_x;
 	double	deltadist_x;
 	double	deltadist_y;
@@ -51,4 +57,12 @@ typedef struct s_struct
 	int		side;
 }	t_struct;
 
+void	my_mlx_pixel_put(t_struct *data, int x, int y, int color);
+void	clear_screen(t_struct *mlx);
+void	draw_square(int size, int x, int y, int color, t_struct *game);
+void	draw_triangle(int size, int x, int y, int color, t_struct *mlx);
+void	rotate(int keycode, t_struct *mlx);
+void	movement(int keycode, t_struct *mlx);
+int		mlx_setup(t_struct *mlx);
+int		clean_exit(t_struct *mlx);
 #endif
