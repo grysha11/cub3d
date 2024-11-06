@@ -5,40 +5,40 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/27 20:03:27 by atamas            #+#    #+#              #
-#    Updated: 2024/11/06 14:34:47 by hzakharc         ###   ########.fr        #
+#    Created: 2024/08/13 09:41:11 by hzakharc          #+#    #+#              #
+#    Updated: 2024/11/06 15:32:34 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
-CFLAGS = -Wall -Werror -Wextra
-SRC = main.c init.c mlx.c draw.c move.c
-OBJ = $(SRC:.c=.o)
-MLX_DIR = ./minilibx
-MLX = $(MLX_DIR)/libmlx.a
-GNL_DIR = ./inc/gnl
-GNL = $(GNL_DIR)/gnl.a
+SRCS		= 	gnl.c
+LIBFTDIR	= 	../libft/
 
-all: $(NAME)
+LIBFT		= 	$(LIBFTDIR)libft.a
+OBJS		= 	$(SRCS:.c=.o)
 
-$(MLX):
-	$(MAKE) -C $(MLX_DIR)
+CC			= 	cc
+RM			= 	@rm -rf
+CCFLAGS		= 	-Wall -Werror -Wextra -I.
 
-$(GNL):
-	$(MAKE) -C $(GNL_DIR)
+NAME		= 	gnl.a
 
-$(NAME): $(GNL) $(MLX) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(GNL) $(MLX) -lX11 -lXext -lm -o $(NAME)
+%.o:			%.c
+				@$(CC) $(CCFLAGS) -c $< -o $@
+
+all:			$(NAME)
+				
+$(NAME):		$(OBJS)
+				@make -sC ${LIBFTDIR}
+				@ar rcs $(NAME) $(LIBFT) $(OBJS)
 
 clean:
-	@$(MAKE) -C $(MLX_DIR) clean
-	@$(MAKE) -C $(GNL_DIR) clean
-	@rm -f $(OBJ)
+				@make --no-print-directory -C $(LIBFTDIR) clean
+				$(RM) $(OBJS)
 
-fclean: clean
-	@$(MAKE) -C $(GNL_DIR) fclean
-	rm -f $(NAME)
+fclean:			clean
+				@make --no-print-directory -C $(LIBFTDIR) fclean
+				$(RM) $(NAME)
 
-re: fclean all
+re:				fclean all
 
-.PHONY: all clean fclean re
+.PHONY:			all clean fclean re

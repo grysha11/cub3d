@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/06 12:48:18 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/06 15:27:20 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include "inc/gnl/gnl.h"
 
 # define SCREEN_X 1024
 # define SCREEN_Y 720
@@ -29,6 +30,13 @@
 # define KEY_RIGHT 65363
 # define PI 3.141592
 # define RED 0x00FF0000
+
+# define COLOR "\033[0m"
+# define COLOR_RED "\033[1;31m"
+# define COLOR_GREEN "\033[1;32m"
+# define COLOR_BLUE "\033[1;34m"
+# define COLOR_PURPLE "\033[1;35m"
+# define COLOR_CYAN "\033[1;36m"
 
 typedef struct s_struct
 {
