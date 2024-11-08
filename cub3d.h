@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/06 12:48:18 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:36:15 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ typedef struct s_struct
 	double	plane_x;
 	double	plane_y;
 	char	player_orient;
+	int		prev_x;
+	double	move_speed;
+	double	rotate_speed;
 	//
 	double	camera_x;
 	double	deltadist_x;
 	double	deltadist_y;
 	double	perpWall;
-	double	move_speed;
-	double	rotate_speed;
 	int		hit;
 	int		side;
 }	t_struct;
