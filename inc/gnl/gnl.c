@@ -6,12 +6,12 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:25:03 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/06 14:25:15 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:52:18 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "gnl.h"
+#include "../libft/libft.h"
 
 char	*ft_get_static(char *str, char buf[BUFFER_SIZE], int len)
 {
