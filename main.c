@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/08 16:12:39 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:23:24 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,27 @@
 
 int	main(int ac, char **av)
 {
-	t_parse	parse;
+	t_parse	*parse;
 
+	parse = ft_calloc(1, sizeof(t_parse));
 	check_files(av, ac);
-	parse_file(av, &parse);
-	for (int i = 0; parse.map[i]; i++)
-		printf("%s\n", parse.map[i]);
-	for (int i = 0; parse.map[i]; i++)
-		free(parse.map[i]);
-	free(parse.map);
+	parse_file(av, parse);
+	parse_textures(parse);
+	parse_colors(parse);
+	// for (int i = 0; parse->map[i]; i++)
+	// 	printf("%s\n", parse->map[i]);
+	// for (int i = 0; parse->textures[i]; i++)
+	// 	printf("%s\n", parse->textures[i]);
+	for (int i = 0; i < 3; i++)
+		printf("%d\n", parse->f_color[i]);
+	printf("\n");
+	for (int i = 0; i < 3; i++)
+		printf("%d\n", parse->c_color[i]);
+	for (int i = 0; parse->map[i]; i++)
+		free(parse->map[i]);
+	for (int i = 0; parse->textures[i]; i++)
+		free(parse->textures[i]);
+	free(parse->map);
+	free(parse);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/08 15:53:47 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:09:25 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ typedef struct s_parse
 	char	**map;
 	double	x;
 	double	y;
-	void	*textures[10];
-	int		c_color;
-	int		f_color;
+	char	*textures[10];
+	int		c_color[3];
+	int		f_color[3];
 }	t_parse;
 
 typedef struct s_struct
@@ -99,5 +99,7 @@ int		clean_exit(t_struct *mlx);
 void	parse_file(char **av, t_parse *parse);
 void	check_files(char **av, int ac);
 void	err_inc_parse(char *first_message);
+void	parse_textures(t_parse *parse);
+void	parse_colors(t_parse *parse);
 
 #endif
