@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/09 18:26:44 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:34:18 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,4 +158,75 @@ void	parse_colors(t_parse *parse)
 		free_matrixx(res);
 		i++;
 	}
+}
+
+int	find_map(t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
+		i++;
+	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
+		i++;
+	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
+		i++;
+	return (i + 1);
+}
+
+void	find_player(t_parse *parse)
+{
+	int	i;
+	int	j;
+	int	x;
+
+	i = find_map(parse);
+	x = 0;
+	while (parse->map[i])
+	{
+		j = 0;
+		while (parse->map[i][j])
+		{
+			if (parse->map[i][j] != '0' && parse->map[i][j] != '1')
+			{
+				parse->x = (double)x;
+				parse->y = (double)j;
+			}
+			j++;
+		}
+		x++;
+		i++;
+	}
+}
+
+int		matrix_len(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		i++;
+	return (i);
+}
+
+void	trim_map(t_parse *parse)
+{
+	char	**res;
+	int		len;
+	int		i;
+
+	len = find_map(parse);
+	res = malloc(sizeof(char *) * (matrix_len(parse->map + len) + 1));
+	i = 0;
+	while (ft_strncmp(parse->map[len], "\n", ft_strlen(parse->map[len])) != 0 &&
+			parse->map[len] != NULL)
+	{
+		res[i] = ft_strdup(parse->map[len]);
+		len++;
+		i++;
+	}
+	res[i] = NULL;
+	res[(int)parse->x][(int)parse->y] = '0';
+	free_matrixx(parse->map);
+	parse->map = res;
 }

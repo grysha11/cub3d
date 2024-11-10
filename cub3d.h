@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/09 18:09:25 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:33:01 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ void	check_files(char **av, int ac);
 void	err_inc_parse(char *first_message);
 void	parse_textures(t_parse *parse);
 void	parse_colors(t_parse *parse);
+int		find_map(t_parse *parse);
+void	find_player(t_parse *parse);
+void	trim_map(t_parse *parse);
 
 #endif
