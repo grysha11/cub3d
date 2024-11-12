@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/12 15:44:36 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:35:30 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	init_parse(int ac, char **av, t_parse *parse)
 {
 	check_files(av, ac);
 	parse_file(av, parse);
+	if (!check_order(parse->map))
+	{
+		free_parse(parse);
+		err_inc_parse("Incorrect order of instructions");
+		exit(1);
+	}
 	parse_textures(parse);
 	parse_colors(parse);
 	find_player(parse);

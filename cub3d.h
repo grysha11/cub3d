@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/12 15:45:49 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:34:13 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,13 @@ int		clean_exit(t_struct *mlx);
 //parsing functions
 void	parse_file(char **av, t_parse *parse);
 void	check_files(char **av, int ac);
+bool	check_order(char **map);
 void	err_inc_parse(char *first_message);
 void	parse_textures(t_parse *parse);
 void	parse_colors(t_parse *parse);
 int		find_map(t_parse *parse);
 void	find_player(t_parse *parse);
 void	trim_map(t_parse *parse);
+void	free_parse(t_parse *parse);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/12 15:43:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:34:47 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,41 @@ void	find_player(t_parse *parse)
 		x++;
 		i++;
 	}
+}
+
+bool	check_order(char **map)
+{
+	int		i;
+	bool	f_textures;
+	bool	f_colors;
+
+	i = 0;
+	f_colors = false;
+	f_textures = false;
+	while (map[i])
+	{
+		if (ft_strncmp(map[i], "NO", 2) == 0 || ft_strncmp(map[i], "SO", 2) == 0 ||
+			ft_strncmp(map[i], "WE", 2) == 0 || ft_strncmp(map[i], "EA", 2) == 0)
+		{
+			if (f_colors)
+				return (false);
+			f_textures = true;
+		}
+		else if (ft_strncmp(map[i], "C", 1) == 0 || ft_strncmp(map[i], "F", 1) == 0)
+		{
+			if (!f_textures)
+				return (false);
+			f_colors = true;
+		}
+		else if (ft_strncmp(map[i], "1", 1) == 0)
+		{
+			if (!f_textures || f_colors)
+				return (false);
+			break ;
+		}
+		i++;
+	}
+	return (true);
 }
 
 int		matrix_len(char **matrix)
