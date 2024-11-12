@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/10 17:33:11 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:23:19 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,62 @@
 // 	return (0);
 // }
 
-
-int	main(int ac, char **av)
+void	init_parse(int ac, char **av, t_parse *parse)
 {
-	t_parse	*parse;
-
-	parse = ft_calloc(1, sizeof(t_parse));
 	check_files(av, ac);
 	parse_file(av, parse);
 	parse_textures(parse);
 	parse_colors(parse);
 	find_player(parse);
 	trim_map(parse);
+}
+
+void	free_parse(t_parse *parse)
+{
+	int	i;
+
+	if (parse)
+	{
+		if (parse->map)
+		{
+			i = 0;
+			while (parse->map[i] != NULL)
+			{
+				free(parse->map[i]);
+				i++;
+			}
+			free(parse->map);
+		}
+		i = 0;
+		while (parse->textures[i])
+		{
+			free(parse->textures[i]);
+			i++;
+		}
+	}
+	free(parse);
+}
+
+void	print_parse(t_parse *parse)
+{
+	printf("MAP: \n");
 	for (int i = 0; parse->map[i]; i++)
 		printf("%s\n", parse->map[i]);
-	// for (int i = 0; parse->textures[i]; i++)
-	// 	printf("%s\n", parse->textures[i]);
-	// for (int i = 0; i < 3; i++)
-	// 	printf("%d\n", parse->f_color[i]);
-	// printf("\n");
-	// for (int i = 0; i < 3; i++)
-	// 	printf("%d\n", parse->c_color[i]);
-	for (int i = 0; parse->map[i]; i++)
-		free(parse->map[i]);
+	printf("TEXTURE PATHES: \n");
 	for (int i = 0; parse->textures[i]; i++)
-		free(parse->textures[i]);
-	free(parse->map);
-	free(parse);
+		printf("%s\n", parse->textures[i]);
+	printf("FLOOR COLOR: \n%d\n", parse->f_color);
+	printf("CEELING COLOR: \n%d\n", parse->c_color);
+}
+
+
+int	main(int ac, char **av)
+{
+	t_parse	*parse;
+
+	parse = ft_calloc(1, sizeof(t_parse));
+	init_parse(ac, av, parse);
+	print_parse(parse);
+	free_parse(parse);
 	return (0);
 }

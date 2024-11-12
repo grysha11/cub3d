@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/10 17:33:01 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:57:12 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include "./minilibx/mlx.h"
 # include "inc/gnl/gnl.h"
 # include "inc/libft/libft.h"
 
@@ -53,8 +54,8 @@ typedef struct s_parse
 	double	x;
 	double	y;
 	char	*textures[10];
-	int		c_color[3];
-	int		f_color[3];
+	int		c_color;
+	int		f_color;
 }	t_parse;
 
 typedef struct s_struct

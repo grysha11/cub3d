@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/10 17:34:18 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:51:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,25 +116,33 @@ void	parse_textures(t_parse *parse)
 	}
 }
 
+int	create_rgb(int *rgb)
+{
+	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+}
+
 void	take_colors(char **str, t_parse *parse)
 {
 	char	**res;
+	int		color[3];
 
 	if (ft_strncmp(str[0], "C", ft_strlen(str[0])) == 0)
 	{
 		
 		res = ft_split(str[1], ',');
-		parse->c_color[0] = ft_atoi(res[0]);
-		parse->c_color[1] = ft_atoi(res[1]);
-		parse->c_color[2] = ft_atoi(res[2]);
+		color[0] = ft_atoi(res[0]);
+		color[1] = ft_atoi(res[1]);
+		color[2] = ft_atoi(res[2]);
+		parse->c_color = create_rgb(color);
 		free_matrixx(res);
 	}
 	else if (ft_strncmp(str[0], "F", ft_strlen(str[0])) == 0)
 	{
 		res = ft_split(str[1], ',');
-		parse->f_color[0] = ft_atoi(res[0]);
-		parse->f_color[1] = ft_atoi(res[1]);
-		parse->f_color[2] = ft_atoi(res[2]);
+		color[0] = ft_atoi(res[0]);
+		color[1] = ft_atoi(res[1]);
+		color[2] = ft_atoi(res[2]);
+		parse->f_color = create_rgb(color);
 		free_matrixx(res);
 	}
 	else
