@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/12 15:43:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:01:44 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	err_inc_parse(char *first_message)
 	printf("Try: %s./cub3d map.cub%s\n", COLOR_CYAN, COLOR);
 }
 
-void	check_files(char **av, int ac)
+void	check_files(char **av, int ac, t_parse *parse)
 {
 	char	*ext;
 
 	if (ac != 2)
 	{
 		err_inc_parse("Incorrect amount of arguments");
+		free_parse(parse);
 		exit(1);
 	}
 	ext = ft_strdup(".cub");
@@ -37,6 +38,7 @@ void	check_files(char **av, int ac)
 	{
 		free(ext);
 		err_inc_parse("Incorrect extension of the file");
+		free_parse(parse);
 		exit(1);
 	}
 }
@@ -49,6 +51,7 @@ void	parse_file(char **av, t_parse *parse)
 	if (fd < 0)
 	{
 		err_inc_parse("Could't open the .cub file");
+		free_parse(parse);
 		exit(1);
 	}
 	parse->map = ft_get_file(fd, 0);
@@ -56,6 +59,7 @@ void	parse_file(char **av, t_parse *parse)
 	{
 		close(fd);
 		err_inc_parse("Could't read the .cub file");
+		free_parse(parse);
 		exit(1);
 	}
 	close(fd);

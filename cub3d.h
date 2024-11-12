@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/12 16:10:56 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/12 17:01:59 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_struct
 {
 	void	*mlx;
 	void	*mlx_win;
-
+	t_parse	*parse;
 	void	*img;
 	char	*addr;
 	int		b_p_p;
@@ -100,12 +100,13 @@ int		clean_exit(t_struct *mlx);
 
 //parsing functions
 void	parse_file(char **av, t_parse *parse);
-void	check_files(char **av, int ac);
+void	check_files(char **av, int ac, t_parse *parse);
 void	err_inc_parse(char *first_message);
 void	parse_textures(t_parse *parse);
 void	parse_colors(t_parse *parse);
 int		find_map(t_parse *parse);
 void	find_player(t_parse *parse);
 void	trim_map(t_parse *parse);
+void	free_parse(t_parse *parse);
 
 #endif
