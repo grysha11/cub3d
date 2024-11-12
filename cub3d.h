@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/12 13:57:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:45:49 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum e_texture
 typedef struct s_parse
 {
 	char	**map;
+	char	dir;
 	double	x;
 	double	y;
 	char	*textures[10];

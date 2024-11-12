@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/12 13:51:02 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:43:12 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ void	find_player(t_parse *parse)
 		{
 			if (parse->map[i][j] != '0' && parse->map[i][j] != '1')
 			{
+				parse->dir = parse->map[i][j];
 				parse->x = (double)x;
 				parse->y = (double)j;
 			}
