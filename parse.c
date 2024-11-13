@@ -173,13 +173,15 @@ int	find_map(t_parse *parse)
 	int	i;
 
 	i = 0;
-	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
+	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
 		i++;
-	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
+	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
 		i++;
-	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
+	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
 		i++;
-	return (i + 1);
+	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
+		i++;
+	return (i);
 }
 
 void	find_player(t_parse *parse)
@@ -234,7 +236,7 @@ bool	check_order(char **map)
 		}
 		else if (ft_strncmp(map[i], "1", 1) == 0)
 		{
-			if (!f_textures || f_colors)
+			if (!f_textures || !f_colors)
 				return (false);
 			break ;
 		}
@@ -259,18 +261,16 @@ void	trim_map(t_parse *parse)
 	int		len;
 	int		i;
 
-	len = find_map(parse);
+	len = find_map(parse) + 1;
 	res = malloc(sizeof(char *) * (matrix_len(parse->map + len) + 1));
 	i = 0;
-	while (ft_strncmp(parse->map[len], "\n", ft_strlen(parse->map[len])) != 0 &&
-			parse->map[len] != NULL)
+	while (parse->map[len] && ft_strncmp(parse->map[len], "\n", ft_strlen(parse->map[len])) != 0)
 	{
 		res[i] = ft_strdup(parse->map[len]);
 		len++;
 		i++;
 	}
 	res[i] = NULL;
-	res[(int)parse->x][(int)parse->y] = '0';
 	free_matrixx(parse->map);
 	parse->map = res;
 }
