@@ -121,30 +121,33 @@ int	create_rgb(int *rgb)
 	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
 
-void	take_colors(char **str, t_parse *parse)
+void	check_colors(char **str, t_parse *parse, int *dst)
 {
 	char	**res;
-	int		color[3];
+	int		colors[3];
 
+	res = ft_split(str[1], ',');
+	if (matrix_len(res) != 3)
+	{
+		err_inc_parse("Incorrect amount of RGB values");
+		free_matrixx(res);
+		free_matrixx(str);
+		free_parse(parse);
+		exit(1);
+	}
+	colors[0] = ft_atoi(res[0]);
+	colors[1] = ft_atoi(res[1]);
+	colors[2] = ft_atoi(res[2]);
+	*dst = create_rgb(colors);
+	free_matrixx(res);
+}
+
+void	take_colors(char **str, t_parse *parse)
+{
 	if (ft_strncmp(str[0], "C", ft_strlen(str[0])) == 0)
-	{
-		
-		res = ft_split(str[1], ',');
-		color[0] = ft_atoi(res[0]);
-		color[1] = ft_atoi(res[1]);
-		color[2] = ft_atoi(res[2]);
-		parse->c_color = create_rgb(color);
-		free_matrixx(res);
-	}
+		check_colors(str, parse, &parse->c_color);
 	else if (ft_strncmp(str[0], "F", ft_strlen(str[0])) == 0)
-	{
-		res = ft_split(str[1], ',');
-		color[0] = ft_atoi(res[0]);
-		color[1] = ft_atoi(res[1]);
-		color[2] = ft_atoi(res[2]);
-		parse->f_color = create_rgb(color);
-		free_matrixx(res);
-	}
+		check_colors(str, parse, &parse->f_color);
 	else
 		return ;
 }
