@@ -93,23 +93,19 @@ void	free_matrixx(char **matrix)
 void	parse_textures(t_parse *parse)
 {
 	int		i;
-	int		j;
-	char	delim;
 	char	**res;
 
 	i = 0; 
 	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
 	{
-		j = 0;
-		while (parse->map[i][j])
+		res = ft_split(parse->map[i], ' ');
+		if (matrix_len(res) != 2)
 		{
-			if (parse->map[i][j] == ' ')
-				delim = ' ';
-			else if (parse->map[i][j] == '\t')
-				delim = '\t';
-			j++;
+			err_inc_parse("Incorrect amount of textures");
+			free_matrixx(res);
+			free_parse(parse);
+			exit(1);
 		}
-		res = ft_split(parse->map[i], delim);
 		take_texture(res, parse);
 		free_matrixx(res);
 		i++;
