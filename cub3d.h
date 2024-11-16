@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/12 16:34:13 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/16 18:11:49 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_flood
 	int		rows;
 	int		col;
 	char	**map;
-	char	**visited;
+	bool	**visited;
 }	t_flood;
 
 typedef struct s_point

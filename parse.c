@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/12 16:34:47 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/16 18:48:42 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,14 +288,39 @@ bool	p_char(char c)
 	return (false);
 }
 
-bool	find_floor()
+bool	find_floor(t_flood *flood)
+{
+	
+}
+
+char	**cpy_matrix(char **str)
+{
+	char	**res;
+	int		i;
+
+	res = malloc(sizeof(str) / sizeof(char *));
+	i = 0;
+	res[sizeof(str) / sizeof(char *)] = NULL;
+	while (str[i])
+	{
+		res[i] = ft_strdup(str[i]);
+		i++;
+	}
+	return (res);
+}
 
 bool	flood_fill(t_parse *parse)
 {
-	s_flood flood;
+	t_flood flood;
 
+	flood.map = cpy_matrix(parse->map);
 	if (find_floor(&flood))
 	{
-
+		
 	}
 }
+
+//todo 
+//I have a structure for the flood fill
+//The main task is to find the way to find the boxes on which I should do the flood_fill
+//If I will give up I will just do the stupid infite flood_fill
