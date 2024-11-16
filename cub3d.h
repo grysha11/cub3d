@@ -48,6 +48,22 @@ typedef enum e_texture
 	EA
 }	t_texture;
 
+typedef struct s_flood
+{
+	int		x;
+	int		y;
+	int		rows;
+	int		col;
+	char	**map;
+	char	**visited;
+}	t_flood;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 typedef struct s_parse
 {
 	char	**map;

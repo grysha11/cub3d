@@ -273,3 +273,29 @@ void	trim_map(t_parse *parse)
 	free_matrixx(parse->map);
 	parse->map = res;
 }
+
+bool	map_char(char c)
+{
+	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ')
+		return (true);
+	return (false);
+}
+
+bool	p_char(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (true);
+	return (false);
+}
+
+bool	find_floor()
+
+bool	flood_fill(t_parse *parse)
+{
+	s_flood flood;
+
+	if (find_floor(&flood))
+	{
+
+	}
+}
