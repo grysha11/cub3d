@@ -6,20 +6,24 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/17 20:41:48 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/17 23:09:30 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_vline(int x, int ds, int de, t_struct *mlx)
+void	draw_vline(t_ray *ray, t_struct *mlx, int x)
 {
 	int	t;
+	int	color;
 
-	t = ds;
-	while (t < de)
+	t = ray->draw_start;
+	color = RED;
+	while (t < ray->draw_end)
 	{
-		my_mlx_pixel_put(mlx, x, t, RED);
+		if (ray->side == 1)
+			color = 0x00ff00;
+		my_mlx_pixel_put(mlx, x, t, color);
 		t++;
 	}
 }
@@ -103,7 +107,7 @@ void	line_height(t_ray *ray, int x)
 	ray->draw_end = ray->line_height / 2 + SCREEN_Y / 2;
 	if (ray->draw_end >= SCREEN_Y)
 		ray->draw_end = SCREEN_Y - 1;
-	draw_vline(x, ray->draw_start, ray->draw_end, ray->mlx);
+	draw_vline(ray, ray->mlx, x);
 	// mlx_put_image_to_window(ray->mlx->mlx, ray->mlx->mlx_win, ray->mlx->img, 0, 0);
 }
 
