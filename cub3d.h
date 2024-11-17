@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/17 16:46:08 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/17 18:47:52 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,28 @@ typedef struct s_struct
 	int		prev_x;
 	double	move_speed;
 	double	rotate_speed;
-	//
+}	t_struct;
+
+typedef struct s_ray
+{
+	t_struct	*mlx;
 	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
 	double	deltadist_x;
 	double	deltadist_y;
-	double	perpWall;
-	int		hit;
+	int		step_x;
+	int		step_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	int		side;
-}	t_struct;
+}	t_ray;
 
 void	my_mlx_pixel_put(t_struct *data, int x, int y, int color);
 void	clear_screen(t_struct *mlx);
@@ -99,6 +113,7 @@ void	movement(int keycode, t_struct *mlx);
 int		mlx_setup(t_struct *mlx);
 void	set_up_player(t_struct *mlx);
 int		clean_exit(t_struct *mlx);
+void	ray_cast(t_struct *mlx);
 
 //parsing functions
 void	parse_file(char **av, t_parse *parse);
