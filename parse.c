@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/12 17:01:44 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/17 16:53:28 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,10 +190,8 @@ void	find_player(t_parse *parse)
 {
 	int	i;
 	int	j;
-	int	x;
 
 	i = find_map(parse);
-	x = 0;
 	while (parse->map[i])
 	{
 		j = 0;
@@ -202,12 +200,11 @@ void	find_player(t_parse *parse)
 			if (parse->map[i][j] != '0' && parse->map[i][j] != '1')
 			{
 				parse->dir = parse->map[i][j];
-				parse->x = (double)x;
+				parse->x = (double)i;
 				parse->y = (double)j;
 			}
 			j++;
 		}
-		x++;
 		i++;
 	}
 }

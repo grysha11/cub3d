@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/12 17:01:59 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/17 16:46:08 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+# define BLOCK_SIZE 32
 # define PI 3.141592
 # define RED 0x00FF0000
 
@@ -92,6 +93,7 @@ void	my_mlx_pixel_put(t_struct *data, int x, int y, int color);
 void	clear_screen(t_struct *mlx);
 void	draw_square(int size, int x, int y, int color, t_struct *game);
 void	draw_triangle(int size, int x, int y, int color, t_struct *mlx);
+void	draw_map(t_struct *mlx);
 void	rotate(int keycode, t_struct *mlx);
 void	movement(int keycode, t_struct *mlx);
 int		mlx_setup(t_struct *mlx);

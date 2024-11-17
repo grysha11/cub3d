@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:44:24 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/05 12:46:00 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/17 16:51:51 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,26 @@ void	draw_triangle(int size, int x, int y, int color, t_struct *mlx)
 	draw_line(mlx, v1_x, v1_y, v2_x, v2_y, color);
 	draw_line(mlx, v2_x, v2_y, v3_x, v3_y, color);
 	draw_line(mlx, v3_x, v3_y, v1_x, v1_y, color);
+}
+
+void	draw_map(t_struct *mlx)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (mlx->parse->map[y])
+	{
+		x = 0;
+		while (mlx->parse->map[y][x])
+		{
+			if (mlx->parse->map[y][x] == '1')
+			{
+				draw_square(32, (x + 1) * BLOCK_SIZE, (y + 1) * BLOCK_SIZE, RED, mlx);
+			}
+			x++;
+		}
+		y++;
+	}
 }
