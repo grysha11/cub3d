@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/18 17:42:10 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/18 18:13:38 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	pre_dda(t_ray *ray)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - mlx->player_x) * ray->deltadist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - mlx->player_x)
+			* ray->deltadist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
@@ -65,7 +66,8 @@ void	pre_dda(t_ray *ray)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - mlx->player_y) * ray->deltadist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - mlx->player_y)
+			* ray->deltadist_y;
 	}
 }
 
@@ -107,28 +109,6 @@ void	line_height(t_ray *ray, int x)
 	if (ray->draw_end >= SCREEN_Y)
 		ray->draw_end = SCREEN_Y - 1;
 	draw_vline(ray, ray->mlx, x);
-	// mlx_put_image_to_window(ray->mlx->mlx, ray->mlx->mlx_win, ray->mlx->img, 0, 0);
-}
-
-void	init_ray(t_ray *ray)
-{
-	ray->camera_x = 0;
-	ray->ray_dir_x = 0;
-	ray->ray_dir_y = 0;
-	ray->map_x = 0;
-	ray->map_y = 0;
-	ray->step_x = 0;
-	ray->step_y = 0;
-	ray->side_dist_x = 0;
-	ray->side_dist_y = 0;
-	ray->deltadist_x = 0;
-	ray->deltadist_y = 0;
-	ray->wall_dist = 0;
-	ray->wall_dist = 0;
-	ray->side = 0;
-	ray->line_height = 0;
-	ray->draw_start = 0;
-	ray->draw_end = 0;
 }
 
 void	ray_cast(t_struct *mlx)
@@ -137,7 +117,6 @@ void	ray_cast(t_struct *mlx)
 	int		x;
 
 	x = 0;
-	init_ray(&ray);
 	ray.mlx = mlx;
 	while (x < SCREEN_X)
 	{

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/17 19:03:33 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/18 18:27:50 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int ac, char **av)
 	// print_parse(parse);
 	// draw_map(&mlx);
 	ray_cast(&mlx);
-	draw_square(5, (mlx.player_x + 1) * BLOCK_SIZE, (mlx.player_y + 1) * BLOCK_SIZE, RED, &mlx);
+	// draw_square(5, (mlx.player_x + 1) * BLOCK_SIZE, (mlx.player_y + 1) * BLOCK_SIZE, RED, &mlx);
 	// draw_triangle(32, (mlx.player_x + 1) * 32, (mlx.player_y + 1) * 32, RED, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	mlx_loop(mlx.mlx);

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/17 18:47:52 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/18 18:24:35 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct s_struct
 	void	*mlx;
 	void	*mlx_win;
 	t_parse	*parse;
+	void	*t_south;
+	void	*t_west;
+	void	*t_north;
+	void	*t_east;
 	void	*img;
 	char	*addr;
 	int		b_p_p;
@@ -106,7 +110,7 @@ typedef struct s_ray
 void	my_mlx_pixel_put(t_struct *data, int x, int y, int color);
 void	clear_screen(t_struct *mlx);
 void	draw_square(int size, int x, int y, int color, t_struct *game);
-void	draw_triangle(int size, int x, int y, int color, t_struct *mlx);
+// void	draw_triangle(int size, int x, int y, int color, t_struct *mlx);
 void	draw_map(t_struct *mlx);
 void	rotate(int keycode, t_struct *mlx);
 void	movement(int keycode, t_struct *mlx);
