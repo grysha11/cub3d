@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/17 23:09:30 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/18 17:42:10 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_vline(t_ray *ray, t_struct *mlx, int x)
 	while (t < ray->draw_end)
 	{
 		if (ray->side == 1)
-			color = 0x00ff00;
+			color = 0x00ff00 / 2;
 		my_mlx_pixel_put(mlx, x, t, color);
 		t++;
 	}
@@ -40,7 +40,6 @@ void	ray_calc(t_ray *ray, int x)
 	ray->map_y = (int)mlx->player_y;
 	ray->deltadist_x = fabs(1 / ray->ray_dir_x);
 	ray->deltadist_y = fabs(1 / ray->ray_dir_y);
-	ray->deltadist_y = 1;
 }
 
 void	pre_dda(t_ray *ray)

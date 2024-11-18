@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/17 20:37:29 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:46:38 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ int	mouse_move(int x, int y, t_struct *mlx)
 	// printf("x: %d, y: %d\n", x, y);
 	// my_mlx_pixel_put(mlx, x, y, 0x00FF0000);
 	clear_screen(mlx);
-	draw_triangle(13, (mlx->player_x + 1) * BLOCK_SIZE, (mlx->player_y + 1) * BLOCK_SIZE, RED, mlx);
-	draw_map(mlx);
+	// draw_triangle(13, (mlx->player_x + 1) * BLOCK_SIZE, (mlx->player_y + 1) * BLOCK_SIZE, RED, mlx);
+	// draw_map(mlx);
+	ray_cast(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	return (y - y);
 }

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/17 19:15:59 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/18 17:51:51 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ void	trim_map(t_parse *parse)
 		i++;
 	}
 	res[i] = NULL;
-	res[(int)parse->x][(int)parse->y] = '0';
+	res[(int)parse->y][(int)parse->x] = '0';
 	free_matrixx(parse->map);
 	parse->map = res;
 }
