@@ -279,9 +279,9 @@ char	**cpy_matrix(char **str)
 	char	**res;
 	int		i;
 
-	res = malloc(sizeof(str) / sizeof(char *));
+	res = malloc(matrix_len(str) + 1);
 	i = 0;
-	res[sizeof(str) / sizeof(char *)] = NULL;
+	res[matrix_len(str) + 1] = NULL;
 	while (str[i])
 	{
 		res[i] = ft_strdup(str[i]);
@@ -365,8 +365,9 @@ void	init_flood(t_parse *parse)
 {
 	t_flood	flood;
 
-	get_w_h(&flood, parse->map);
+	get_w_h(&flood, parse);
 	get_cords(&flood, get_n_cords(parse->map), parse->map);
+	printf("W is %d H is %d\n", flood.w, flood.h);
 }
 
 

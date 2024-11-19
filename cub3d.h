@@ -125,5 +125,6 @@ void	find_player(t_parse *parse);
 void	trim_map(t_parse *parse);
 int		matrix_len(char **matrix);
 void	free_parse(t_parse *parse);
+void	init_flood(t_parse *parse);
 
 #endif

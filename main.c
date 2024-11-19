@@ -42,6 +42,7 @@ void	init_parse(int ac, char **av, t_parse *parse)
 	parse_colors(parse);
 	find_player(parse);
 	trim_map(parse);
+	init_flood(parse);
 }
 
 void	free_parse(t_parse *parse)
