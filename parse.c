@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/16 18:48:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:13:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,25 +274,6 @@ void	trim_map(t_parse *parse)
 	parse->map = res;
 }
 
-bool	map_char(char c)
-{
-	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ')
-		return (true);
-	return (false);
-}
-
-bool	p_char(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (true);
-	return (false);
-}
-
-bool	find_floor(t_flood *flood)
-{
-	
-}
-
 char	**cpy_matrix(char **str)
 {
 	char	**res;
@@ -309,16 +290,86 @@ char	**cpy_matrix(char **str)
 	return (res);
 }
 
-bool	flood_fill(t_parse *parse)
+void	get_w_h(t_flood *flood, t_parse *parse)
 {
-	t_flood flood;
+	int	i;
+	int	j;
+	int	w;
 
-	flood.map = cpy_matrix(parse->map);
-	if (find_floor(&flood))
+	i = 0;
+	w = 0;
+	while (parse->map[i])
 	{
-		
+		j = 0;
+		while (parse->map[i][j])
+			j++;
+		if (j > w)
+			w = j;
+		i++;
+	}
+	flood->w = w;
+	flood->h = i;
+}
+
+int		get_n_cords(char **map)
+{
+	int	i;
+	int	j;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0' || map[i][j] == 'N' ||
+				map[i][j] == 'W' || map[i][j] == 'S' || map[i][j] == 'E')
+				res++;
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
+void	get_cords(t_flood *flood, int size, char **map)
+{
+	int	i;
+	int	j;
+	int	c;
+
+	flood->s_cord = malloc(sizeof(t_point) * size);
+	i = 0;
+	c = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0' || map[i][j] == 'N' ||
+				map[i][j] == 'W' || map[i][j] == 'S' || map[i][j] == 'E')
+			{
+				flood->s_cord[c].x = j;
+				flood->s_cord[c].y = i;
+				c++;
+			}
+			j++;
+		}
+		i++;
 	}
 }
+
+void	init_flood(t_parse *parse)
+{
+	t_flood	flood;
+
+	get_w_h(&flood, parse->map);
+	get_cords(&flood, get_n_cords(parse->map), parse->map);
+}
+
+
 
 //todo 
 //I have a structure for the flood fill

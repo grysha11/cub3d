@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/16 18:11:49 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:02:25 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,20 @@ typedef enum e_texture
 	EA
 }	t_texture;
 
-typedef struct s_flood
-{
-	int		x;
-	int		y;
-	int		rows;
-	int		col;
-	char	**map;
-	bool	**visited;
-}	t_flood;
-
 typedef struct s_point
 {
 	int	x;
 	int	y;
 }	t_point;
+
+typedef struct s_flood
+{
+	t_point	cur;
+	int		w;
+	int		h;
+	char	**map;
+	t_point	*s_cord;
+}	t_flood;
 
 typedef struct s_parse
 {
@@ -73,6 +72,7 @@ typedef struct s_parse
 	char	*textures[10];
 	int		c_color;
 	int		f_color;
+	t_flood	flood;
 }	t_parse;
 
 typedef struct s_struct
