@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:44:24 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/18 18:19:12 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/19 15:37:51 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@ void	clear_screen(t_struct *mlx)
 {
 	int	i;
 	int	j;
+	int	color;
 
 	i = 0;
 	j = 0;
+	color = mlx->parse->c_color;
 	while (i < SCREEN_Y)
 	{
 		j = 0;
+		if (i > SCREEN_Y / 2)
+			color = mlx->parse->f_color;
 		while (j < SCREEN_X)
 		{
 			j++;
-			my_mlx_pixel_put(mlx, j, i, 0);
+			my_mlx_pixel_put(mlx, j, i, color);
 		}
 		i++;
 	}
