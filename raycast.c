@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/19 16:06:18 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/20 13:54:02 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,42 @@ int	find_texture_color(t_ray *ray, t_struct *mlx)
 		tex_x = TEXTURE_X - tex_x - 1;
 	step = 1.0 * TEXTURE_Y / ray->line_height;
 	tex_pos = (ray->draw_start - SCREEN_Y / 2 + ray->line_height / 2) * step;
+	return 0;
+}
 
+int		choose_img_side(t_ray *ray)
+{
+	int	img;
+
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir_x < 0)
+			img = 0x55bbaa; // left aka west side
+		else
+			img = 0x0000FF; // right aka east side
+	}
+	else
+	{
+		if (ray->ray_dir_y < 0)
+			img = RED; // north side
+		else
+			img = 0x0000FF00; // south side
+	}
+	return (img);
 }
 
 void	draw_vline(t_ray *ray, t_struct *mlx, int x)
 {
 	int	t;
-	int	color;
+	int	img;
 
 	t = ray->draw_start;
-	color = RED;
+	img = choose_img_side(ray);
+	// color & 8355711
+
 	while (t < ray->draw_end)
 	{
-		if (ray->side == 1)
-			color = 0x00ff00 / 2;
-		my_mlx_pixel_put(mlx, x, t, color);
+		my_mlx_pixel_put(mlx, x, t, img);
 		t++;
 	}
 }
