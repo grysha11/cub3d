@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/18 18:13:38 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/20 11:49:20 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,24 @@ void	draw_vline(t_ray *ray, t_struct *mlx, int x)
 	int	color;
 
 	t = ray->draw_start;
-	color = RED;
+	color = 0x00FF00;
+	// color & 8355711
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir_x < 0)
+			color = RED; // left aka west side
+		else
+			color = 0x0000FF; // right aka east side
+	}
+	else
+	{
+		if (ray->ray_dir_y < 0)
+			color = RED; // north side
+		else
+			color = 0x0000FF00; // south side
+	}
 	while (t < ray->draw_end)
 	{
-		if (ray->side == 1)
-			color = 0x00ff00 / 2;
 		my_mlx_pixel_put(mlx, x, t, color);
 		t++;
 	}
