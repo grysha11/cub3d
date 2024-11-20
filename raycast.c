@@ -6,11 +6,33 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/18 18:13:38 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/19 16:06:18 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	find_texture_color(t_ray *ray, t_struct *mlx)
+{
+	double	wall_x;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+
+	if (ray->side == 0)
+		wall_x = mlx->player_y + ray->wall_dist * ray->ray_dir_y;
+	else
+		wall_x = mlx->player_x + ray->wall_dist * ray->ray_dir_x;
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * (double)TEXTURE_X);
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		tex_x = TEXTURE_X - tex_x - 1;
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		tex_x = TEXTURE_X - tex_x - 1;
+	step = 1.0 * TEXTURE_Y / ray->line_height;
+	tex_pos = (ray->draw_start - SCREEN_Y / 2 + ray->line_height / 2) * step;
+
+}
 
 void	draw_vline(t_ray *ray, t_struct *mlx, int x)
 {

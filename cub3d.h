@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/18 18:24:35 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/19 15:35:39 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define SCREEN_X 1024
 # define SCREEN_Y 720
+# define TEXTURE_X 64
+# define TEXTURE_Y 64
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
