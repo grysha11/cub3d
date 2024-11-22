@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/19 15:35:39 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/22 23:56:32 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,34 @@ typedef struct s_struct
 	void	*mlx;
 	void	*mlx_win;
 	t_parse	*parse;
-	void	*t_south;
-	void	*t_west;
-	void	*t_north;
-	void	*t_east;
+	void	*north_img;
+	int		n_width;
+	int		n_height;
+	char	*n_addr;
+	int		n_b_p_p;
+	int		n_line_length;
+	int		n_endian;
+	void	*south_img;
+	int		s_width;
+	int		s_height;
+	char	*s_addr;
+	int		s_b_p_p;
+	int		s_line_length;
+	int		s_endian;
+	void	*west_img;
+	int		w_width;
+	int		w_height;
+	char	*w_addr;
+	int		w_b_p_p;
+	int		w_line_length;
+	int		w_endian;
+	void	*east_img;
+	int		e_width;
+	int		e_height;
+	char	*e_addr;
+	int		e_b_p_p;
+	int		e_line_length;
+	int		e_endian;
 	void	*img;
 	char	*addr;
 	int		b_p_p;
@@ -87,6 +111,7 @@ typedef struct s_struct
 	double	move_speed;
 	double	rotate_speed;
 }	t_struct;
+
 
 typedef struct s_ray
 {

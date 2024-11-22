@@ -6,32 +6,42 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/20 13:54:02 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/23 00:05:31 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	find_texture_color(t_ray *ray, t_struct *mlx)
+int	find_texture_color(t_ray *ray, t_struct *mlx, int x)
 {
 	double	wall_x;
 	int		tex_x;
+	int		tex_y;
 	double	step;
 	double	tex_pos;
+	int		color;
 
 	if (ray->side == 0)
 		wall_x = mlx->player_y + ray->wall_dist * ray->ray_dir_y;
 	else
 		wall_x = mlx->player_x + ray->wall_dist * ray->ray_dir_x;
 	wall_x -= floor(wall_x);
-	tex_x = (int)(wall_x * (double)TEXTURE_X);
+	tex_x = (int)(wall_x * (double)mlx->n_width);
 	if (ray->side == 0 && ray->ray_dir_x > 0)
-		tex_x = TEXTURE_X - tex_x - 1;
+		tex_x = mlx->n_width - tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y < 0)
-		tex_x = TEXTURE_X - tex_x - 1;
-	step = 1.0 * TEXTURE_Y / ray->line_height;
+		tex_x = mlx->n_width - tex_x - 1;
+	step = 1.0 * mlx->n_height / ray->line_height;
 	tex_pos = (ray->draw_start - SCREEN_Y / 2 + ray->line_height / 2) * step;
-	return 0;
+	while (ray->draw_start < ray->draw_end)
+	{
+		tex_y = (int)tex_pos & (mlx->n_height - 1);
+		tex_pos += step;
+		color = *(unsigned int *)(mlx->n_addr + mlx->n_line_length * tex_y + tex_x * (mlx->n_b_p_p / 8));
+		my_mlx_pixel_put(mlx, x, ray->draw_start, color);
+		ray->draw_start++;
+	}
+	return color;
 }
 
 int		choose_img_side(t_ray *ray)
@@ -41,14 +51,14 @@ int		choose_img_side(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->ray_dir_x < 0)
-			img = 0x55bbaa; // left aka west side
+			img = RED; // left aka west side
 		else
 			img = 0x0000FF; // right aka east side
 	}
 	else
 	{
 		if (ray->ray_dir_y < 0)
-			img = RED; // north side
+			img = 0x00FFFFFF; // north side
 		else
 			img = 0x0000FF00; // south side
 	}
@@ -57,18 +67,18 @@ int		choose_img_side(t_ray *ray)
 
 void	draw_vline(t_ray *ray, t_struct *mlx, int x)
 {
-	int	t;
-	int	img;
+	// int	t;
+	// int	img;
 
-	t = ray->draw_start;
-	img = choose_img_side(ray);
-	// color & 8355711
-
-	while (t < ray->draw_end)
-	{
-		my_mlx_pixel_put(mlx, x, t, img);
-		t++;
-	}
+	// t = ray->draw_start;
+	// img = choose_img_side(ray);
+	// // color & 8355711
+	find_texture_color(ray, mlx, x);
+	// while (t < ray->draw_end)
+	// {
+	// 	my_mlx_pixel_put(mlx, x, t, img);
+	// 	t++;
+	// }
 }
 
 void	ray_calc(t_ray *ray, int x)

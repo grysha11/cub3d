@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/18 18:33:49 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/23 00:03:19 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	my_mlx_pixel_put(t_struct *data, int x, int y, int color)
 int	clean_exit(t_struct *mlx)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img);
+	mlx_destroy_image(mlx->mlx, mlx->north_img);
+	mlx_destroy_image(mlx->mlx, mlx->south_img);
+	mlx_destroy_image(mlx->mlx, mlx->east_img);
+	mlx_destroy_image(mlx->mlx, mlx->west_img);
 	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
