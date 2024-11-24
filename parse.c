@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/19 15:13:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:29:09 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,7 @@ void	get_w_h(t_flood *flood, t_parse *parse)
 			w = j;
 		i++;
 	}
-	flood->w = w;
+	flood->w = w + 1;
 	flood->h = i;
 }
 
@@ -359,6 +359,20 @@ void	get_cords(t_flood *flood, int size, char **map)
 		}
 		i++;
 	}
+	flood->s_cord[c].x = -1;
+	flood->s_cord[c].y = -1;
+}
+
+// void	fill()
+// only one thing that I don't understand is how to do the function for checking neighbours
+// and with what char fill the dup map
+
+bool	fill_loop(t_flood *flood)
+{
+	while (flood->s_cord->x != -1)
+	{
+		//fill
+	}
 }
 
 void	init_flood(t_parse *parse)
@@ -367,12 +381,9 @@ void	init_flood(t_parse *parse)
 
 	get_w_h(&flood, parse);
 	get_cords(&flood, get_n_cords(parse->map), parse->map);
+	fill_loop(&flood);
 	printf("W is %d H is %d\n", flood.w, flood.h);
 }
 
-
-
-//todo 
-//I have a structure for the flood fill
-//The main task is to find the way to find the boxes on which I should do the flood_fill
-//If I will give up I will just do the stupid infite flood_fill
+//Idea is from philip michalev to do the flood fill from the outside and not from the inside
+//I think I will try to do the ff from the inside tbh but we will see
