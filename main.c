@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/23 00:17:24 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/24 20:43:51 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,45 @@ void	print_parse(t_parse *parse)
 	printf("CEELING COLOR: \n%d\n", parse->c_color);
 }
 
-unsigned int my_mlx_pixel_get(t_struct *data, int x, int y)
+unsigned int	my_mlx_pixel_get(t_textures *data, int x, int y)
 {
-    char	*src;
+	char	*src;
 
-    src = data->addr + (y * data->line_length + x * (data->b_p_p / 8));
-    return *(unsigned int *)src;
+	src = data->addr + (y * data->line_length + x * (data->b_p_p / 8));
+	return (*(unsigned int *)src);
 }
 
-void	init_texture(t_struct *mlx)
+void	set_textures(t_struct *mlx, char **textures)
 {
-
-	mlx->north_img = mlx_xpm_file_to_image(mlx->mlx, "./inc/north.xpm", &mlx->n_width, &mlx->n_height);
-	mlx->n_addr = mlx_get_data_addr(mlx->north_img, &mlx->n_b_p_p, &mlx->n_line_length, &mlx->n_endian);
-	mlx->south_img = mlx_xpm_file_to_image(mlx->mlx, "./inc/south.xpm", &mlx->s_width, &mlx->s_height);
-	mlx->s_addr = mlx_get_data_addr(mlx->south_img, &mlx->s_b_p_p, &mlx->s_line_length, &mlx->s_endian);
-	mlx->east_img = mlx_xpm_file_to_image(mlx->mlx, "./inc/east.xpm", &mlx->e_width, &mlx->e_height);
-	mlx->e_addr = mlx_get_data_addr(mlx->east_img, &mlx->e_b_p_p, &mlx->e_line_length, &mlx->e_endian);
-	mlx->west_img = mlx_xpm_file_to_image(mlx->mlx, "./inc/west.xpm", &mlx->w_width, &mlx->w_height);
-	mlx->w_addr = mlx_get_data_addr(mlx->west_img, &mlx->w_b_p_p, &mlx->w_line_length, &mlx->w_endian);
+	mlx->texture[NO].img = mlx_xpm_file_to_image(mlx->mlx, textures[NO],
+			&mlx->texture[NO].width, &mlx->texture[NO].height);
+	mlx->texture[SO].img = mlx_xpm_file_to_image(mlx->mlx, textures[SO],
+			&mlx->texture[SO].width, &mlx->texture[SO].height);
+	mlx->texture[WE].img = mlx_xpm_file_to_image(mlx->mlx, textures[WE],
+			&mlx->texture[WE].width, &mlx->texture[WE].height);
+	mlx->texture[EA].img = mlx_xpm_file_to_image(mlx->mlx, textures[EA],
+			&mlx->texture[EA].width, &mlx->texture[EA].height);
+	if (mlx->texture[NO].img == NULL || mlx->texture[SO].img == NULL
+		|| mlx->texture[WE].img == NULL || mlx->texture[EA].img == NULL)
+		return (printf("Exit\n"), exit(1));
+	mlx->texture[NO].addr = mlx_get_data_addr(mlx->texture[NO].img,
+			&mlx->texture[NO].b_p_p, &mlx->texture[NO].line_length,
+			&mlx->texture[NO].endian);
+	mlx->texture[SO].addr = mlx_get_data_addr(mlx->texture[SO].img,
+			&mlx->texture[SO].b_p_p, &mlx->texture[SO].line_length,
+			&mlx->texture[SO].endian);
+	mlx->texture[WE].addr = mlx_get_data_addr(mlx->texture[WE].img,
+			&mlx->texture[WE].b_p_p, &mlx->texture[WE].line_length,
+			&mlx->texture[WE].endian);
+	mlx->texture[EA].addr = mlx_get_data_addr(mlx->texture[EA].img,
+			&mlx->texture[EA].b_p_p, &mlx->texture[EA].line_length,
+			&mlx->texture[EA].endian);
 }
 
 int	main(int ac, char **av)
 {
 	t_struct	mlx;
-	t_parse	*parse;
+	t_parse		*parse;
 
 	parse = ft_calloc(1, sizeof(t_parse));
 	mlx.parse = parse;
@@ -94,7 +108,7 @@ int	main(int ac, char **av)
 	print_parse(parse);
 	if (mlx_setup(&mlx))
 		return (1);
-	init_texture(&mlx);
+	set_textures(&mlx, parse->textures);
 	// print_parse(parse);
 	// draw_map(&mlx);
 	clear_screen(&mlx);
