@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/12 15:43:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:51:51 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	err_inc_parse(char *first_message)
 	printf("Try: %s./cub3d map.cub%s\n", COLOR_CYAN, COLOR);
 }
 
-void	check_files(char **av, int ac)
+void	check_files(char **av, int ac, t_parse *parse)
 {
 	char	*ext;
 
 	if (ac != 2)
 	{
 		err_inc_parse("Incorrect amount of arguments");
+		free_parse(parse);
 		exit(1);
 	}
 	ext = ft_strdup(".cub");
@@ -37,6 +38,7 @@ void	check_files(char **av, int ac)
 	{
 		free(ext);
 		err_inc_parse("Incorrect extension of the file");
+		free_parse(parse);
 		exit(1);
 	}
 }
@@ -49,6 +51,7 @@ void	parse_file(char **av, t_parse *parse)
 	if (fd < 0)
 	{
 		err_inc_parse("Could't open the .cub file");
+		free_parse(parse);
 		exit(1);
 	}
 	parse->map = ft_get_file(fd, 0);
@@ -56,6 +59,7 @@ void	parse_file(char **av, t_parse *parse)
 	{
 		close(fd);
 		err_inc_parse("Could't read the .cub file");
+		free_parse(parse);
 		exit(1);
 	}
 	close(fd);
@@ -186,10 +190,10 @@ void	find_player(t_parse *parse)
 {
 	int	i;
 	int	j;
-	int	x;
+	int	y;
 
+	y = 0;
 	i = find_map(parse);
-	x = 0;
 	while (parse->map[i])
 	{
 		j = 0;
@@ -198,12 +202,12 @@ void	find_player(t_parse *parse)
 			if (parse->map[i][j] != '0' && parse->map[i][j] != '1')
 			{
 				parse->dir = parse->map[i][j];
-				parse->x = (double)x;
-				parse->y = (double)j;
+				parse->x = (double)j;
+				parse->y = (double)y;
 			}
 			j++;
 		}
-		x++;
+		y++;
 		i++;
 	}
 }
@@ -235,7 +239,7 @@ void	trim_map(t_parse *parse)
 		i++;
 	}
 	res[i] = NULL;
-	res[(int)parse->x][(int)parse->y] = '0';
+	res[(int)parse->y][(int)parse->x] = '0';
 	free_matrixx(parse->map);
 	parse->map = res;
 }
