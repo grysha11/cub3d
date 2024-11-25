@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/24 20:47:45 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/25 15:29:01 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define BLOCK_SIZE 32
 # define PI 3.141592
 # define RED 0x00FF0000
+# define MOVE_SPEED 0.2
+# define ROT_SPEED 1
 
 # define COLOR "\033[0m"
 # define COLOR_RED "\033[1;31m"
