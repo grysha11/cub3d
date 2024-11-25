@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/19 15:02:25 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:14:36 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ typedef struct s_point
 typedef struct s_flood
 {
 	t_point	cur;
-	int		w;
-	int		h;
+	t_point size;
 	char	**map;
 	t_point	*s_cord;
 }	t_flood;

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/24 17:29:09 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:26:30 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,8 +307,8 @@ void	get_w_h(t_flood *flood, t_parse *parse)
 			w = j;
 		i++;
 	}
-	flood->w = w + 1;
-	flood->h = i;
+	flood->size.x = w + 1;
+	flood->size.y = i;
 }
 
 int		get_n_cords(char **map)
@@ -363,16 +363,41 @@ void	get_cords(t_flood *flood, int size, char **map)
 	flood->s_cord[c].y = -1;
 }
 
-// void	fill()
-// only one thing that I don't understand is how to do the function for checking neighbours
-// and with what char fill the dup map
+bool	fill(char **map, t_point size, t_point start)
+{
+	char	c;
+
+	if (start.y < 0 || start.y >= size.y || start.x < 0 || start.x >= size.x)
+		return (true);
+	c = map[start.y][start.x];
+	if (c == '0' || c == 'N' || c == 'E' || c == 'W' || c == 'S')
+	{
+		if (start.y >= size.y - 1 || start.y == 0 || start.x == 0 || start.x >= size.x - 1)
+			return (false);
+		//neighbour check
+		map[start.y][start.x] = 'X';
+		fill(map, size, (t_point){start.x, start.y - 1});
+		fill(map, size, (t_point){start.x, start.y + 1});
+		fill(map, size, (t_point){start.x - 1, start.y});
+		fill(map, size, (t_point){start.x + 1, start.y});
+	}
+	return (true);
+}
 
 bool	fill_loop(t_flood *flood)
 {
-	while (flood->s_cord->x != -1)
+	int	i;
+
+	i = 0;
+	while (flood->s_cord[i].x != -1)
 	{
-		//fill
+		if (!fill(flood->map, flood->size, flood->s_cord[i]))
+		{
+			return (false);
+		}
+		i++;
 	}
+	return (true);
 }
 
 void	init_flood(t_parse *parse)
@@ -382,7 +407,9 @@ void	init_flood(t_parse *parse)
 	get_w_h(&flood, parse);
 	get_cords(&flood, get_n_cords(parse->map), parse->map);
 	fill_loop(&flood);
-	printf("W is %d H is %d\n", flood.w, flood.h);
+	//fill loop is bool:
+	//add the checker for false to screen the error
+	//and free the 2 structures (parse and flood)
 }
 
 //Idea is from philip michalev to do the flood fill from the outside and not from the inside
