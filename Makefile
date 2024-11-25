@@ -24,7 +24,7 @@ OBJS		=	$(SRCS:.c=.o)
 CC			=	@cc
 RM			=	@rm -f
 CCFLAGS		=	-Wall -Werror -Wextra -Iinclude/mlx
-MLXFLAGS	=	-L/usr/X11/lib -lX11 -lXext -Llibs/mlx_linux -lmlx -lm
+MLXFLAGS	=	-L/usr/X11/lib -lX11 -lXext -Lminilibx -lmlx -lm
 
 BLUE		=	\033[0;94m
 RED			=	\033[0;91m

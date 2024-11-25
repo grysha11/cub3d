@@ -180,7 +180,7 @@ int	find_map(t_parse *parse)
 		i++;
 	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
 		i++;
-	return (i);
+	return (i - 1);
 }
 
 void	find_player(t_parse *parse)
@@ -279,14 +279,14 @@ char	**cpy_matrix(char **str)
 	char	**res;
 	int		i;
 
-	res = malloc(matrix_len(str) + 1);
+	res = malloc(sizeof(char *) * (matrix_len(str) + 1));
 	i = 0;
-	res[matrix_len(str) + 1] = NULL;
 	while (str[i])
 	{
 		res[i] = ft_strdup(str[i]);
 		i++;
 	}
+	res[i] = NULL;
 	return (res);
 }
 
@@ -340,7 +340,7 @@ void	get_cords(t_flood *flood, int size, char **map)
 	int	j;
 	int	c;
 
-	flood->s_cord = malloc(sizeof(t_point) * size);
+	flood->s_cord = malloc(sizeof(t_point) * (size + 1));
 	i = 0;
 	c = 0;
 	while (map[i])
@@ -363,6 +363,28 @@ void	get_cords(t_flood *flood, int size, char **map)
 	flood->s_cord[c].y = -1;
 }
 
+bool	neighbour(char **map, t_point size, t_point start)
+{
+	int	i;
+	t_point	c[4];
+	
+	c[0] = (t_point){start.x, start.y - 1};
+	c[1] = (t_point){start.x, start.y + 1};
+	c[2] = (t_point){start.x - 1, start.y};
+	c[3] = (t_point){start.x + 1, start.y};
+	i = 0;
+	while (i < 4)
+	{
+		if (c[i].y >= 0 && c[i].x >= 0 && c[i].y < size.y && c[i].x < size.x)
+		{
+			if (map[c[i].y][c[i].x] == ' ' || map[c[i].y][c[i].x] == '\0')
+				return (false);
+			i++;
+		}
+	}
+	return (true);
+}
+
 bool	fill(char **map, t_point size, t_point start)
 {
 	char	c;
@@ -374,12 +396,14 @@ bool	fill(char **map, t_point size, t_point start)
 	{
 		if (start.y >= size.y - 1 || start.y == 0 || start.x == 0 || start.x >= size.x - 1)
 			return (false);
-		//neighbour check
+		if (!neighbour(map, size, start))
+			return (false);
 		map[start.y][start.x] = 'X';
-		fill(map, size, (t_point){start.x, start.y - 1});
-		fill(map, size, (t_point){start.x, start.y + 1});
-		fill(map, size, (t_point){start.x - 1, start.y});
-		fill(map, size, (t_point){start.x + 1, start.y});
+		if (!fill(map, size, (t_point){start.x, start.y - 1}) ||
+		!fill(map, size, (t_point){start.x, start.y + 1}) ||
+		!fill(map, size, (t_point){start.x - 1, start.y}) ||
+		!fill(map, size, (t_point){start.x + 1, start.y}))
+			return (false);
 	}
 	return (true);
 }
@@ -392,9 +416,7 @@ bool	fill_loop(t_flood *flood)
 	while (flood->s_cord[i].x != -1)
 	{
 		if (!fill(flood->map, flood->size, flood->s_cord[i]))
-		{
 			return (false);
-		}
 		i++;
 	}
 	return (true);
@@ -404,13 +426,16 @@ void	init_flood(t_parse *parse)
 {
 	t_flood	flood;
 
+	flood.map = cpy_matrix(parse->map);
 	get_w_h(&flood, parse);
 	get_cords(&flood, get_n_cords(parse->map), parse->map);
-	fill_loop(&flood);
-	//fill loop is bool:
-	//add the checker for false to screen the error
-	//and free the 2 structures (parse and flood)
+	if (!fill_loop(&flood))
+	{
+		free(flood.s_cord);
+		free_matrixx(flood.map);
+		err_inc_parse("Map is not closed");
+		exit(1);
+	}
+	free(flood.s_cord);
+	free_matrixx(flood.map);
 }
-
-//Idea is from philip michalev to do the flood fill from the outside and not from the inside
-//I think I will try to do the ff from the inside tbh but we will see
