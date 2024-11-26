@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:47:39 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 10:03:30 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/26 16:40:10 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	set_up_player(t_struct *mlx)
 		set_n_or_s(mlx);
 	else if (mlx->player_orient == 'E' || mlx->player_orient == 'W')
 		set_w_or_e(mlx);
-	mlx->move_speed = 0.5;
+	mlx->move_speed = 0.1;
 	mlx->rotate_speed = 3;
 	mlx->prev_x = SCREEN_X / 2;
 }

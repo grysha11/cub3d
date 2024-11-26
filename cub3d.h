@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/26 16:35:37 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:39:22 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,74 +67,6 @@ typedef struct s_flood
 	char	**map;
 	t_point	*s_cord;
 }	t_flood;
-
-typedef struct s_parse
-{
-	char	**map;
-	char	dir;
-	double	x;
-	double	y;
-	char	*textures[10];
-	int		c_color;
-	int		f_color;
-	t_flood	flood;
-}	t_parse;
-
-# define COLOR "\033[0m"
-# define COLOR_RED "\033[1;31m"
-# define COLOR_GREEN "\033[1;32m"
-# define COLOR_BLUE "\033[1;34m"
-# define COLOR_PURPLE "\033[1;35m"
-# define COLOR_CYAN "\033[1;36m"
-
-typedef enum e_texture
-{
-	NO,
-	SO,
-	WE,
-	EA
-}	t_texture;
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
-
-typedef struct s_flood
-{
-	t_point	cur;
-	t_point size;
-	char	**map;
-	t_point	*s_cord;
-}	t_flood;
-
-typedef struct s_parse
-{
-	char	**map;
-	char	dir;
-	double	x;
-	double	y;
-	char	*textures[10];
-	int		c_color;
-	int		f_color;
-	t_flood	flood;
-}	t_parse;
-
-# define COLOR "\033[0m"
-# define COLOR_RED "\033[1;31m"
-# define COLOR_GREEN "\033[1;32m"
-# define COLOR_BLUE "\033[1;34m"
-# define COLOR_PURPLE "\033[1;35m"
-# define COLOR_CYAN "\033[1;36m"
-
-typedef enum e_texture
-{
-	NO,
-	SO,
-	WE,
-	EA
-}	t_texture;
 
 typedef struct s_parse
 {
@@ -217,18 +149,6 @@ int				clean_exit(t_struct *mlx);
 void			ray_cast(t_struct *mlx);
 void			line_height(t_ray *ray);
 void			choose_img_side(t_ray *ray, t_struct *mlx);
-
-//parsing functions
-void			parse_file(char **av, t_parse *parse);
-void			check_files(char **av, int ac);
-void			err_inc_parse(char *first_message);
-void			parse_textures(t_parse *parse);
-void			parse_colors(t_parse *parse);
-int				find_map(t_parse *parse);
-void			find_player(t_parse *parse);
-void			trim_map(t_parse *parse);
-void			free_parse(t_parse *parse);
-
 
 //parsing functions
 void	parse_file(char **av, t_parse *parse);
