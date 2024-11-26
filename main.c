@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/26 16:35:29 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:20:03 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	main(int ac, char **av)
 	mlx.parse = parse;
 	init_parse(ac, av, parse);
 	set_up_player(&mlx);
-	print_parse(parse);
 	if (mlx_setup(&mlx))
 		return (1);
 	set_textures(&mlx, parse->textures);
