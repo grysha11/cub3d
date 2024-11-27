@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/26 16:39:22 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:41:24 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,7 @@ void	trim_map(t_parse *parse);
 int		matrix_len(char **matrix);
 void	free_parse(t_parse *parse);
 void	init_flood(t_parse *parse);
+void	tab_trim(t_parse *parse);
+void	free_matrixx(char **matrix);
 
 #endif

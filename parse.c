@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/26 16:32:19 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:02:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,76 @@ void	parse_file(char **av, t_parse *parse)
 		exit(1);
 	}
 	close(fd);
+}
+
+void	assign_tab(char *src, char *dst)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (src[i])
+	{
+		if (src[i] == '\t' || src[i] == '\v')
+		{
+			dst[j] = ' ';
+			dst[j++] = ' ';
+			dst[j++] = ' ';
+			dst[j++] = ' ';
+			i++;
+		}
+		else
+		{
+			dst[j] = src[i];
+			j++;
+			i++;
+		}
+	}
+	dst[j] = '\0';
+}
+
+char	*tab_alloc(char *src)
+{
+	char	*res;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = 0;
+	while (src[i])
+	{
+		if (src[i] == '\t' || src[i] == '\v')
+			len += 4;
+		i++;
+		len++;
+	}
+	res = malloc(sizeof(char) * (len + 1));
+	assign_tab(src, res);
+	return (res);
+}
+
+void	tab_trim(t_parse *parse)
+{
+	char	**res;
+	int		i;
+
+	i = 0;
+	res = malloc(sizeof(char *) * (matrix_len(parse->map) + 1));
+	while (parse->map[i])
+	{
+		res[i] = tab_alloc(parse->map[i]);
+		i++;
+	}
+	res[i] = NULL;
+	// printf("ORIGINAL STR IS: \n\n");
+	// for (int i = 0; parse->map[i]; i++)
+	// 	printf("STRLEN IS %zu\tSTRING IS %s\n", ft_strlen(parse->map[i]), parse->map[i]);
+	// printf("RESULT IS: \n\n");
+	// for (int i = 0; res[i]; i++)
+	// 	printf("STRLEN IS %zu\tSTRING IS %s\n", ft_strlen(res[i]), res[i]);
+	free_matrixx(parse->map);
+	parse->map = res;
 }
 
 void	take_texture(char **str, t_parse *parse)
