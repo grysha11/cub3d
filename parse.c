@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/27 17:27:00 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:38:14 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,6 @@ void	tab_trim(t_parse *parse)
 		i++;
 	}
 	res[i] = NULL;
-	// printf("ORIGINAL STR IS: \n\n");
-	// for (int i = 0; parse->map[i]; i++)
-	// 	printf("STRLEN IS %zu\tSTRING IS %s\n", ft_strlen(parse->map[i]), parse->map[i]);
-	// printf("RESULT IS: \n\n");
-	// for (int i = 0; res[i]; i++)
-	// 	printf("STRLEN IS %zu\tSTRING IS %s\n", ft_strlen(res[i]), res[i]);
 	free_matrixx(parse->map);
 	parse->map = res;
 }
@@ -257,10 +251,10 @@ void	find_player(t_parse *parse)
 {
 	int	i;
 	int	j;
-	int	x;
+	int	y;
 
+	y = 0;
 	i = find_map(parse);
-	x = 0;
 	while (parse->map[i])
 	{
 		j = 0;
@@ -269,13 +263,13 @@ void	find_player(t_parse *parse)
 			if (parse->map[i][j] != '0' && parse->map[i][j] != '1' && parse->map[i][j] != ' ')
 			{
 				parse->dir = parse->map[i][j];
-				printf("parse->player: %c\n", parse->map[i][j]);
-				parse->x = (double)x;
-				parse->y = (double)j;
+				parse->map[i][j] = '0';
+				parse->x = (double)j;
+				parse->y = (double)y;
 			}
 			j++;
 		}
-		x++;
+		y++;
 		i++;
 	}
 }
