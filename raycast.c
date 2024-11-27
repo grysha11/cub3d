@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 12:31:43 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:24:58 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,12 @@ void	put_walls(t_ray *ray, t_struct *mlx, int x)
 void	ray_calc(t_ray *ray, t_struct *mlx, int x)
 {
 	ray->camera_x = 2 * x / (double)SCREEN_X - 1;
-	// printf("ray->camera_x: %f\n", ray->camera_x);
 	ray->ray_dir_x = mlx->dir_x + mlx->plane_x * ray->camera_x;
-	// printf("ray->ray_dir_x: %f\n", ray->ray_dir_x);
 	ray->ray_dir_y = mlx->dir_y + mlx->plane_y * ray->camera_x;
-	// printf("ray->ray_dir_y: %f\n", ray->ray_dir_y);
 	ray->map_x = (int)mlx->player_x;
-	// printf("ray->map_x: %d\n", ray->map_x);
 	ray->map_y = (int)mlx->player_y;
-	// printf("ray->map_y: %d\n", ray->map_x);
 	ray->deltadist_x = fabs(1 / ray->ray_dir_x);
-	// printf("ray->deltadist_x: %f\n", ray->deltadist_x);
 	ray->deltadist_y = fabs(1 / ray->ray_dir_y);
-	// printf("ray->deltadist_y: %f\n", ray->deltadist_y);
 }
 
 void	pre_dda(t_ray *ray, t_struct *mlx)

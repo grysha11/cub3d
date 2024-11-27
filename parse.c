@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/27 14:02:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:27:00 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,9 +266,10 @@ void	find_player(t_parse *parse)
 		j = 0;
 		while (parse->map[i][j])
 		{
-			if (parse->map[i][j] != '0' && parse->map[i][j] != '1')
+			if (parse->map[i][j] != '0' && parse->map[i][j] != '1' && parse->map[i][j] != ' ')
 			{
 				parse->dir = parse->map[i][j];
+				printf("parse->player: %c\n", parse->map[i][j]);
 				parse->x = (double)x;
 				parse->y = (double)j;
 			}

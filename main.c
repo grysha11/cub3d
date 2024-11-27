@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 13:41:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:12:47 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,16 @@ int	main(int ac, char **av)
 	parse = ft_calloc(1, sizeof(t_parse));
 	mlx.parse = parse;
 	init_parse(ac, av, parse);
-	// set_up_player(&mlx);
-	// if (mlx_setup(&mlx))
-	// 	return (1);
-	// set_textures(&mlx, parse->textures);
+	set_up_player(&mlx);
+	if (mlx_setup(&mlx))
+		return (1);
+	set_textures(&mlx, parse->textures);
 	print_parse(parse);
-	// clear_screen(&mlx);
-	// ray_cast(&mlx);
-	// mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
-	// mlx_loop(mlx.mlx);
-	// clean_exit(&mlx);
+	clear_screen(&mlx);
+	ray_cast(&mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
+	mlx_loop(mlx.mlx);
+	clean_exit(&mlx);
 	free_parse(parse);
 	return (0);
 }
