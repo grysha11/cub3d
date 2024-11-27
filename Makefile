@@ -6,12 +6,12 @@
 #    By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/11/17 18:48:05 by atamas           ###   ########.fr        #
+#    Updated: 2024/11/27 18:15:11 by atamas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		=	main.c draw.c init.c mlx.c \
-				move.c parse.c raycast.c
+				move.c parse.c raycast.c raycast_helper.c
 
 LIBFTDIR	=	inc/libft
 GNLDIR		=	inc/gnl

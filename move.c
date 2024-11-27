@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:04:07 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 17:00:13 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/27 18:16:03 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ void	can_move(t_struct *mlx, double new_x, double new_y)
 		mlx->player_x = new_x;
 		mlx->player_y = new_y;
 	}
-	// x = new_x;
-	// y = new_y;
-	// printf("x is: %f y is: %f\n", x, y);
-	// if (mlx->parse->map[(int)floor(y)][(int)floor(x)] != '1')
-	// {
-	// 	mlx->player_x = new_x;
-	// 	mlx->player_y = new_y;
-	// }
 	// if (x > 0 && x < SCREEN_X && mlx->parse->map[inty][intx] != '1')
 	// 	mlx->player_x = new_x;
 	// if (y > 0 && y < SCREEN_Y && mlx->parse->map[inty][intx] != '1')

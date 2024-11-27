@@ -6,29 +6,11 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/24 20:07:23 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/27 18:14:04 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	choose_img_side(t_ray *ray, t_struct *mlx)
-{
-	if (ray->side == 0)
-	{
-		if (ray->ray_dir_x < 0)
-			ray->t = mlx->texture[WE];
-		else
-			ray->t = mlx->texture[EA];
-	}
-	else
-	{
-		if (ray->ray_dir_y < 0)
-			ray->t = mlx->texture[NO];
-		else
-			ray->t = mlx->texture[SO];
-	}
-}
 
 void	put_walls(t_ray *ray, t_struct *mlx, int x)
 {
@@ -122,17 +104,6 @@ void	dda(t_ray *ray, t_struct *mlx)
 		ray->wall_dist = (ray->side_dist_x - ray->deltadist_x);
 	else
 		ray->wall_dist = (ray->side_dist_y - ray->deltadist_y);
-}
-
-void	line_height(t_ray *ray)
-{
-	ray->line_height = (int)(SCREEN_Y / ray->wall_dist);
-	ray->draw_start = -(ray->line_height) / 2 + SCREEN_Y / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + SCREEN_Y / 2;
-	if (ray->draw_end >= SCREEN_Y)
-		ray->draw_end = SCREEN_Y - 1;
 }
 
 void	ray_cast(t_struct *mlx)

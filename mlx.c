@@ -6,21 +6,13 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/24 18:12:25 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/27 18:15:35 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "./minilibx/mlx_int.h"
 #include "cub3d.h"
-
-void	my_mlx_pixel_put(t_struct *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->b_p_p / 8));
-	*(unsigned int *)dst = color;
-}
 
 int	clean_exit(t_struct *mlx)
 {
@@ -39,18 +31,13 @@ int	clean_exit(t_struct *mlx)
 int	event_handler(int keycode, t_struct *mlx)
 {
 	if (keycode == KEY_ESC)
-	{
 		clean_exit(mlx);
-	}
 	if (keycode == KEY_A || keycode == KEY_D
 		|| keycode == KEY_S || keycode == KEY_W)
 		movement(keycode, mlx);
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		rotate(keycode, mlx);
 	clear_screen(mlx);
-	// draw_triangle(13, (mlx->player_x + 1) * 32, (mlx->player_y + 1) * 32, RED, mlx);
-	// draw_square(5, (mlx->player_x + 1) * BLOCK_SIZE, (mlx->player_y + 1) * BLOCK_SIZE, RED, mlx);
-	// draw_map(mlx);
 	ray_cast(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	return (0);
@@ -63,11 +50,7 @@ int	mouse_move(int x, int y, t_struct *mlx)
 	else
 		rotate(KEY_RIGHT, mlx);
 	mlx->prev_x = x;
-	// printf("x: %d, y: %d\n", x, y);
-	// my_mlx_pixel_put(mlx, x, y, 0x00FF0000);
 	clear_screen(mlx);
-	// draw_triangle(13, (mlx->player_x + 1) * BLOCK_SIZE, (mlx->player_y + 1) * BLOCK_SIZE, RED, mlx);
-	// draw_map(mlx);
 	ray_cast(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
 	return (y - y);
