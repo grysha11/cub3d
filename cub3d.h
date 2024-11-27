@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 18:14:40 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/27 19:36:44 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,23 @@ typedef struct s_textures
 	int		endian;
 }	t_textures;
 
+typedef struct s_keys
+{
+	bool	forward;
+	bool	backward;
+	bool	left;
+	bool	right;
+	bool	r_right;
+	bool	r_left;
+}	t_keys;
+
 typedef struct s_struct
 {
 	void		*mlx;
 	void		*mlx_win;
 	t_parse		*parse;
 	t_textures	texture[4];
+	t_keys		key;
 	void		*img;
 	char		*addr;
 	int			b_p_p;

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 18:15:35 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/27 19:58:50 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,57 @@ int	clean_exit(t_struct *mlx)
 	exit(0);
 }
 
-int	event_handler(int keycode, t_struct *mlx)
+int	key_press(int keycode, t_struct *mlx)
 {
 	if (keycode == KEY_ESC)
 		clean_exit(mlx);
+	if (keycode == KEY_W)
+		mlx->key.forward = True;
+	if (keycode == KEY_S)
+		mlx->key.backward = True;
+	if (keycode == KEY_A)
+		mlx->key.left = True;
+	if (keycode == KEY_D)
+		mlx->key.right = True;
+	if (keycode == KEY_LEFT)
+		mlx->key.r_left = True;
+	if (keycode == KEY_RIGHT)
+		mlx->key.r_right = True;
+	clear_screen(mlx);
+	ray_cast(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+	return (0);
+}
+
+int	key_up(int keycode, t_struct *mlx)
+{
+	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
+		|| keycode == KEY_D)
+	{
+		if (keycode == KEY_W)
+			mlx->key.forward = False;
+		if (keycode == KEY_S)
+			mlx->key.backward = False;
+		if (keycode == KEY_A)
+			mlx->key.left = False;
+		if (keycode == KEY_D)
+			mlx->key.right = False;
+	}
+	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	{
+		if (keycode == KEY_LEFT)
+			mlx->key.r_left = False;
+		if (keycode == KEY_RIGHT)
+			mlx->key.r_right = False;
+	}
+	clear_screen(mlx);
+	ray_cast(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+	return (0);
+}
+
+int	event_handler(int keycode, t_struct *mlx)
+{
 	if (keycode == KEY_A || keycode == KEY_D
 		|| keycode == KEY_S || keycode == KEY_W)
 		movement(keycode, mlx);
