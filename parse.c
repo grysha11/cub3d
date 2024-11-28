@@ -12,12 +12,6 @@
 
 #include "cub3d.h"
 
-void	err_inc_parse(char *first_message)
-{
-	printf("%sERROR %s: %s\n\t", COLOR_RED, first_message, COLOR);
-	printf("Try: %s./cub3d map.cub%s\n", COLOR_CYAN, COLOR);
-}
-
 void	check_files(char **av, int ac)
 {
 	char	*ext;
@@ -128,30 +122,37 @@ void	tab_trim(t_parse *parse)
 void	take_texture(char **str, t_parse *parse)
 {
 	if (ft_strncmp(str[0], "NO", ft_strlen(str[0])) == 0)
+	{
 		parse->textures[NO] = ft_strdup(str[1]);
+		parse->no++;
+	}
 	else if (ft_strncmp(str[0], "SO", ft_strlen(str[0])) == 0)
+	{
 		parse->textures[SO] = ft_strdup(str[1]);
+		parse->so++;
+	}
 	else if (ft_strncmp(str[0], "WE", ft_strlen(str[0])) == 0)
+	{
 		parse->textures[WE] = ft_strdup(str[1]);
+		parse->we++;
+	}
 	else if (ft_strncmp(str[0], "EA", ft_strlen(str[0])) == 0)
+	{
 		parse->textures[EA] = ft_strdup(str[1]);
+		parse->ea++;
+	}
 	else
 		return ;
 }
 
-void	free_matrixx(char **matrix)
+void	valid_textures(t_parse *parse)
 {
-	int	i;
-
-	i = 0;
-	if (matrix == NULL)
-		return ;
-	while (matrix[i] != NULL)
+	if (parse->no != 1 || parse->so != 1 || parse->we != 1 || parse->ea != 1)
 	{
-		free(matrix[i]);
-		i++;
+		err_inc_parse("Incorect amount of textures");
+		free_parse(parse);
+		exit(1);
 	}
-	free(matrix);
 }
 
 void	parse_textures(t_parse *parse)
@@ -174,11 +175,19 @@ void	parse_textures(t_parse *parse)
 		free_matrixx(res);
 		i++;
 	}
+	valid_textures(parse);
 }
 
-int	create_rgb(int *rgb)
+int	create_rgb(int *rgb, t_parse *parse)
 {
-	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	if ((rgb[0] >= 0 && rgb[0] <= 255) && (rgb[1] >= 0 && rgb[1] <= 255) && (rgb[2] >= 0 && rgb[2] <= 255))
+		return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	else
+	{
+		err_inc_parse("Incorrect color values");
+		free_parse(parse);
+		exit(1);
+	}
 }
 
 void	check_colors(char **str, t_parse *parse, int *dst)
@@ -198,16 +207,22 @@ void	check_colors(char **str, t_parse *parse, int *dst)
 	colors[0] = ft_atoi(res[0]);
 	colors[1] = ft_atoi(res[1]);
 	colors[2] = ft_atoi(res[2]);
-	*dst = create_rgb(colors);
 	free_matrixx(res);
+	*dst = create_rgb(colors, parse);
 }
 
 void	take_colors(char **str, t_parse *parse)
 {
 	if (ft_strncmp(str[0], "C", ft_strlen(str[0])) == 0)
+	{
+		parse->c++;
 		check_colors(str, parse, &parse->c_color);
+	}
 	else if (ft_strncmp(str[0], "F", ft_strlen(str[0])) == 0)
+	{
+		parse->f++;
 		check_colors(str, parse, &parse->f_color);
+	}
 	else
 		return ;
 }
@@ -225,6 +240,13 @@ void	parse_colors(t_parse *parse)
 	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
 	{
 		res = ft_split(parse->map[i], ' ');
+		if (matrix_len(res) != 2)
+		{
+			err_inc_parse("Incorrect format of colors");
+			free_matrixx(res);
+			free_parse(parse);
+			exit(1);
+		}
 		take_colors(res, parse);
 		free_matrixx(res);
 		i++;
@@ -309,16 +331,6 @@ bool	check_order(char **map)
 	return (true);
 }
 
-int		matrix_len(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-		i++;
-	return (i);
-}
-
 void	trim_map(t_parse *parse)
 {
 	char	**res;
@@ -337,22 +349,6 @@ void	trim_map(t_parse *parse)
 	res[i] = NULL;
 	free_matrixx(parse->map);
 	parse->map = res;
-}
-
-char	**cpy_matrix(char **str)
-{
-	char	**res;
-	int		i;
-
-	res = malloc(sizeof(char *) * (matrix_len(str) + 1));
-	i = 0;
-	while (str[i])
-	{
-		res[i] = ft_strdup(str[i]);
-		i++;
-	}
-	res[i] = NULL;
-	return (res);
 }
 
 void	get_w_h(t_flood *flood, t_parse *parse)
@@ -426,81 +422,4 @@ void	get_cords(t_flood *flood, int size, char **map)
 	}
 	flood->s_cord[c].x = -1;
 	flood->s_cord[c].y = -1;
-}
-
-bool	neighbour(char **map, t_point size, t_point start)
-{
-	int	i;
-	t_point	c[4];
-	
-	c[0] = (t_point){start.x, start.y - 1};
-	c[1] = (t_point){start.x, start.y + 1};
-	c[2] = (t_point){start.x - 1, start.y};
-	c[3] = (t_point){start.x + 1, start.y};
-	i = 0;
-	while (i < 4)
-	{
-		if (c[i].y >= 0 && c[i].x >= 0 && c[i].y < size.y && c[i].x < size.x)
-		{
-			if (map[c[i].y][c[i].x] == ' ' || map[c[i].y][c[i].x] == '\0')
-				return (false);
-			i++;
-		}
-	}
-	return (true);
-}
-
-bool	fill(char **map, t_point size, t_point start)
-{
-	char	c;
-
-	if (start.y < 0 || start.y >= size.y || start.x < 0 || start.x >= size.x)
-		return (true);
-	c = map[start.y][start.x];
-	if (c == '0' || c == 'N' || c == 'E' || c == 'W' || c == 'S')
-	{
-		if (start.y >= size.y - 1 || start.y == 0 || start.x == 0 || start.x >= size.x - 1)
-			return (false);
-		if (!neighbour(map, size, start))
-			return (false);
-		map[start.y][start.x] = 'X';
-		if (!fill(map, size, (t_point){start.x, start.y - 1}) ||
-		!fill(map, size, (t_point){start.x, start.y + 1}) ||
-		!fill(map, size, (t_point){start.x - 1, start.y}) ||
-		!fill(map, size, (t_point){start.x + 1, start.y}))
-			return (false);
-	}
-	return (true);
-}
-
-bool	fill_loop(t_flood *flood)
-{
-	int	i;
-
-	i = 0;
-	while (flood->s_cord[i].x != -1)
-	{
-		if (!fill(flood->map, flood->size, flood->s_cord[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-void	init_flood(t_parse *parse)
-{
-	t_flood	flood;
-
-	flood.map = cpy_matrix(parse->map);
-	get_w_h(&flood, parse);
-	get_cords(&flood, get_n_cords(parse->map), parse->map);
-	if (!fill_loop(&flood))
-	{
-		free(flood.s_cord);
-		free_matrixx(flood.map);
-		err_inc_parse("Map is not closed");
-		exit(1);
-	}
-	free(flood.s_cord);
-	free_matrixx(flood.map);
 }

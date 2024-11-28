@@ -77,6 +77,12 @@ typedef struct s_parse
 	char	*textures[10];
 	int		c_color;
 	int		f_color;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		c;
+	int		f;
 }	t_parse;
 
 typedef struct s_textures

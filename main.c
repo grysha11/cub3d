@@ -20,6 +20,12 @@ void	init_parse(int ac, char **av, t_parse *parse)
 	tab_trim(parse);
 	parse_textures(parse);
 	parse_colors(parse);
+	if (parse->c != 1 || parse->f != 1)
+	{
+		err_inc_parse("Incorrect amount of colors");
+		free_parse(parse);
+		exit(1);
+	}
 	find_player(parse);
 	trim_map(parse);
 	init_flood(parse);
