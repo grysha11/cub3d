@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/28 11:45:12 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:19:46 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 
 # define SCREEN_X 1024
 # define SCREEN_Y 720
-# define TEXTURE_X 64
-# define TEXTURE_Y 64
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -32,11 +30,9 @@
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
-# define BLOCK_SIZE 32
 # define PI 3.141592
-# define RED 0x00FF0000
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 1
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.5
 
 # define COLOR "\033[0m"
 # define COLOR_RED "\033[1;31m"

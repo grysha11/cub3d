@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/28 11:52:42 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:02:45 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,6 @@ int	key_up(int keycode, t_struct *mlx)
 	return (0);
 }
 
-int	mouse_move(int x, int y, t_struct *mlx)
-{
-	if (x < mlx->prev_x)
-		mlx->key.r_left = true;
-	else
-		mlx->key.r_right = true;
-	mlx->prev_x = x;
-	return (y - y);
-}
-
 int	mlx_setup(t_struct *mlx)
 {
 	mlx->mlx = mlx_init();
@@ -102,7 +92,6 @@ int	mlx_setup(t_struct *mlx)
 	mlx_hook(mlx->mlx_win, 17, 1L << 17, clean_exit, mlx);
 	mlx_hook(mlx->mlx_win, 2, 1L << 0, key_down, mlx);
 	mlx_hook(mlx->mlx_win, 3, 1L << 1, key_up, mlx);
-	// mlx_hook(mlx->mlx_win, 6, 1L << 6, mouse_move, mlx);
 	mlx->img = mlx_new_image(mlx->mlx, SCREEN_X, SCREEN_Y);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->b_p_p,
 			&mlx->line_length, &mlx->endian);

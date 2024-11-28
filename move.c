@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:04:07 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/28 11:30:57 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:13:29 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,8 @@ void	can_move(t_struct *mlx, double new_x, double new_y)
 	}
 }
 
-void	movement(t_struct *mlx)
+void	move_left_right(t_struct *mlx, double new_x, double new_y)
 {
-	double	new_x;
-	double	new_y;
-
-	new_x = mlx->player_x;
-	new_y = mlx->player_y;
 	if (mlx->key.left == true)
 	{
 		new_x -= mlx->plane_x * mlx->move_speed;
@@ -81,15 +76,30 @@ void	movement(t_struct *mlx)
 		new_x += mlx->plane_x * mlx->move_speed;
 		new_y += mlx->plane_y * mlx->move_speed;
 	}
-	if (mlx->key.forward == true)
-	{
-		new_x += mlx->dir_x * mlx->move_speed;
-		new_y += mlx->dir_y * mlx->move_speed;
-	}
-	if (mlx->key.backward == true)
-	{
-		new_x -= mlx->dir_x * mlx->move_speed;
-		new_y -= mlx->dir_y * mlx->move_speed;
-	}
 	can_move(mlx, new_x, new_y);
+}
+
+void	movement(t_struct *mlx)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = mlx->player_x;
+	new_y = mlx->player_y;
+	if (mlx->key.left == true || mlx->key.right == true)
+		move_left_right(mlx, new_x, new_y);
+	else
+	{
+		if (mlx->key.forward == true)
+		{
+			new_x += mlx->dir_x * mlx->move_speed;
+			new_y += mlx->dir_y * mlx->move_speed;
+		}
+		if (mlx->key.backward == true)
+		{
+			new_x -= mlx->dir_x * mlx->move_speed;
+			new_y -= mlx->dir_y * mlx->move_speed;
+		}
+		can_move(mlx, new_x, new_y);
+	}
 }
