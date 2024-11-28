@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/28 20:27:17 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/29 00:22:54 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ int	render(t_struct *mlx)
 
 int	clean_exit(t_struct *mlx)
 {
-	mlx_destroy_image(mlx->mlx, mlx->img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[NO].img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[SO].img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[EA].img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[WE].img);
+	if (mlx->img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->img);
+	if (mlx->texture[NO].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[NO].img);
+	if (mlx->texture[SO].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[SO].img);
+	if (mlx->texture[EA].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[EA].img);
+	if (mlx->texture[WE].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[WE].img);
 	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
