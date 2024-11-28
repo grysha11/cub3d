@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:47:39 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 18:14:21 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 11:32:00 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,10 @@ void	set_up_player(t_struct *mlx)
 	mlx->move_speed = MOVE_SPEED;
 	mlx->rotate_speed = ROT_SPEED;
 	mlx->prev_x = SCREEN_X / 2;
+	mlx->key.backward = false;
+	mlx->key.forward = false;
+	mlx->key.left = false;
+	mlx->key.right = false;
+	mlx->key.r_left = false;
+	mlx->key.r_right = false;
 }

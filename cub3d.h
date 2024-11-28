@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 19:36:44 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 11:45:12 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define BLOCK_SIZE 32
 # define PI 3.141592
 # define RED 0x00FF0000
-# define MOVE_SPEED 0.2
+# define MOVE_SPEED 0.1
 # define ROT_SPEED 1
 
 # define COLOR "\033[0m"
@@ -137,14 +137,15 @@ void			my_mlx_pixel_put(t_struct *data, int x, int y, int color);
 unsigned int	my_mlx_pixel_get(t_textures *data, int x, int y);
 void			clear_screen(t_struct *mlx);
 void			draw_map(t_struct *mlx);
-void			rotate(int keycode, t_struct *mlx);
-void			movement(int keycode, t_struct *mlx);
+void			rotate(t_struct *mlx);
+void			movement(t_struct *mlx);
 int				mlx_setup(t_struct *mlx);
 void			set_up_player(t_struct *mlx);
 int				clean_exit(t_struct *mlx);
 void			ray_cast(t_struct *mlx);
 void			line_height(t_ray *ray);
 void			choose_img_side(t_ray *ray, t_struct *mlx);
+int				render(t_struct *mlx);
 
 //parsing functions
 void			parse_file(char **av, t_parse *parse);
