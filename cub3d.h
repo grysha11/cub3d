@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 09:41:26 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 20:26:57 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 
 # define SCREEN_X 1024
 # define SCREEN_Y 720
-# define TEXTURE_X 64
-# define TEXTURE_Y 64
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -32,9 +30,9 @@
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
-# define BLOCK_SIZE 32
 # define PI 3.141592
-# define RED 0x00FF0000
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.5
 
 # define COLOR "\033[0m"
 # define COLOR_RED "\033[1;31m"
@@ -73,12 +71,23 @@ typedef struct s_textures
 	int		endian;
 }	t_textures;
 
+typedef struct s_keys
+{
+	bool	forward;
+	bool	backward;
+	bool	left;
+	bool	right;
+	bool	r_right;
+	bool	r_left;
+}	t_keys;
+
 typedef struct s_struct
 {
 	void		*mlx;
 	void		*mlx_win;
 	t_parse		*parse;
 	t_textures	texture[4];
+	t_keys		key;
 	void		*img;
 	char		*addr;
 	int			b_p_p;
@@ -124,14 +133,15 @@ void			my_mlx_pixel_put(t_struct *data, int x, int y, int color);
 unsigned int	my_mlx_pixel_get(t_textures *data, int x, int y);
 void			clear_screen(t_struct *mlx);
 void			draw_map(t_struct *mlx);
-void			rotate(int keycode, t_struct *mlx);
-void			movement(int keycode, t_struct *mlx);
+void			rotate(t_struct *mlx);
+void			movement(t_struct *mlx);
 int				mlx_setup(t_struct *mlx);
 void			set_up_player(t_struct *mlx);
 int				clean_exit(t_struct *mlx);
 void			ray_cast(t_struct *mlx);
 void			line_height(t_ray *ray);
 void			choose_img_side(t_ray *ray, t_struct *mlx);
+int				render(t_struct *mlx);
 
 //parsing functions
 void			parse_file(char **av, t_parse *parse);

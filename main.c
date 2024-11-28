@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 10:06:26 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/28 20:26:42 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ int	main(int ac, char **av)
 	if (mlx_setup(&mlx))
 		return (1);
 	set_textures(&mlx, parse->textures);
-	// print_parse(parse);
-	clear_screen(&mlx);
-	ray_cast(&mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
+	mlx_loop_hook(mlx.mlx, render, &mlx);
 	mlx_loop(mlx.mlx);
 	clean_exit(&mlx);
 	return (0);
