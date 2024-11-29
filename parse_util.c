@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_util.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 18:17:33 by hzakharc          #+#    #+#             */
+/*   Updated: 2024/11/29 18:18:11 by hzakharc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	err_inc_parse(char *first_message)
@@ -21,7 +33,7 @@ void	free_matrixx(char **matrix)
 	free(matrix);
 }
 
-int		matrix_len(char **matrix)
+int	matrix_len(char **matrix)
 {
 	int	i;
 

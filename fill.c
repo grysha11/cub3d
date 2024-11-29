@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 18:17:23 by hzakharc          #+#    #+#             */
+/*   Updated: 2024/11/29 18:19:00 by hzakharc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 bool	neighbour(char **map, t_point size, t_point start)
 {
-	int	i;
+	int		i;
 	t_point	c[4];
-	
+
 	c[0] = (t_point){start.x, start.y - 1};
 	c[1] = (t_point){start.x, start.y + 1};
 	c[2] = (t_point){start.x - 1, start.y};
@@ -31,7 +43,8 @@ bool	fill(char **map, t_point size, t_point start)
 	c = map[start.y][start.x];
 	if (c == '0' || c == 'N' || c == 'E' || c == 'W' || c == 'S')
 	{
-		if (start.y >= size.y - 1 || start.y == 0 || start.x == 0 || start.x >= size.x - 1)
+		if (start.y >= size.y - 1 || start.y == 0
+			|| start.x == 0 || start.x >= size.x - 1)
 			return (false);
 		if (!neighbour(map, size, start))
 			return (false);
