@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/30 19:53:47 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:28:23 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	check_files(char **av, int ac)
 		exit(1);
 	}
 	ext = ft_strdup(".cub");
-	if (ft_strlen(av[1]) >= 4 && ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ext, 4) == 0)
+	if (ft_strlen(av[1]) >= 4 && ft_strncmp(av[1]
+			+ ft_strlen(av[1]) - 4, ext, 4) == 0)
 	{
 		free(ext);
 		return ;
@@ -118,84 +119,3 @@ void	tab_trim(t_parse *parse)
 	free_matrixx(parse->map);
 	parse->map = res;
 }
-
-void	find_player(t_parse *parse)
-{
-	int	i;
-	int	j;
-	int	y;
-
-	y = 0;
-	i = 0;
-	while (parse->map[i])
-	{
-		j = 0;
-		while (parse->map[i][j])
-		{
-			if (parse->map[i][j] != '0' && parse->map[i][j] != '1' && parse->map[i][j] != ' ')
-			{
-				parse->dir = parse->map[i][j];
-				parse->map[i][j] = '0';
-				parse->x = (double)j;
-				parse->y = (double)y;
-			}
-			j++;
-		}
-		y++;
-		i++;
-	}
-}
-
-bool	check_order(char **map)
-{
-	int		i;
-	bool	f_textures;
-	bool	f_colors;
-
-	i = 0;
-	f_colors = false;
-	f_textures = false;
-	while (map[i])
-	{
-		if (ft_strncmp(map[i], "NO", 2) == 0 || ft_strncmp(map[i], "SO", 2) == 0 ||
-			ft_strncmp(map[i], "WE", 2) == 0 || ft_strncmp(map[i], "EA", 2) == 0)
-		{
-			if (f_colors)
-				return (false);
-			f_textures = true;
-		}
-		else if (ft_strncmp(map[i], "C", 1) == 0 || ft_strncmp(map[i], "F", 1) == 0)
-		{
-			if (!f_textures)
-				return (false);
-			f_colors = true;
-		}
-		else if (ft_strncmp(map[i], "1", 1) == 0)
-		{
-			if (!f_textures || !f_colors)
-				return (false);
-			break ;
-		}
-		i++;
-	}
-	return (true);
-}
-
-int	find_str(char **map)
-{
-	static int	i = 0;
-	int			res;
-
-	while (map[i] && ft_strncmp(map[i], "\n", ft_strlen(map[i])) == 0)
-		i++;
-	res = i;
-	i += 1;
-	return (res);
-}
-
-//TODO change the way I parse files:
-//because everything should be in particular order
-//I have to make the static char of the current string and skip all of the \n strings
-//using strncmp
-//I will have to redo a lot of shit 
-//damn

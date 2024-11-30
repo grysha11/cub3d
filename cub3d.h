@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/30 19:25:16 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:30:20 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ void			choose_img_side(t_ray *ray, t_struct *mlx);
 //parsing functions
 void	parse_file(char **av, t_parse *parse);
 void	check_files(char **av, int ac);
-bool	check_order(char **map);
 void	err_inc_parse(char *first_message);
 void	parse_textures(t_parse *parse);
 void	parse_colors(t_parse *parse);

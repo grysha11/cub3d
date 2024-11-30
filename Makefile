@@ -6,7 +6,7 @@
 #    By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/11/30 19:22:22 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/11/30 23:21:33 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 CC			=	@cc
 RM			=	@rm -f
-CCFLAGS		=	-Wall -Werror -Wextra -Iinclude/mlx
+CCFLAGS		=	-Wall -Werror -Wextra -Iinclude/mlx -g
 MLXFLAGS	=	-L/usr/X11/lib -lX11 -lXext -Llibs/mlx_linux -lm
 
 BLUE		=	\033[0;94m

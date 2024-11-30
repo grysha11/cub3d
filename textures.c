@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:23:14 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/30 19:54:28 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:25:34 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	parse_textures(t_parse *parse)
 	while (count < 4)
 	{
 		i = find_str(parse->map);
-		//printf("%d is find str\n", i);
 		res = ft_split(parse->map[i], ' ');
 		if (matrix_len(res) != 2)
 		{

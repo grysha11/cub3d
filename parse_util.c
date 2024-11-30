@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:17:33 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/29 18:18:11 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:24:52 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,17 @@ char	**cpy_matrix(char **str)
 		i++;
 	}
 	res[i] = NULL;
+	return (res);
+}
+
+int	find_str(char **map)
+{
+	static int	i = 0;
+	int			res;
+
+	while (map[i] && ft_strncmp(map[i], "\n", ft_strlen(map[i])) == 0)
+		i++;
+	res = i;
+	i += 1;
 	return (res);
 }
