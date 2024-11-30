@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:24:25 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/29 18:28:34 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:54:16 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	take_colors(char **str, t_parse *parse)
 void	parse_colors(t_parse *parse)
 {
 	int		i;
+	int		count;
 	char	**res;
 
-	i = 0;
-	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
-		i++;
-	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
-		i++;
-	while (ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
+	count = 0;
+	while (count < 2)
 	{
+		i = find_str(parse->map);
+		//printf("%d is colors\n", i);
+		//printf("%s\n", parse->map[i]);
 		res = ft_split(parse->map[i], ' ');
 		if (matrix_len(res) != 2)
 		{
@@ -84,6 +84,6 @@ void	parse_colors(t_parse *parse)
 		}
 		take_colors(res, parse);
 		free_matrixx(res);
-		i++;
+		count++;
 	}
 }

@@ -3,15 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
+#    By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/11/26 16:32:45 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/11/30 19:22:22 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		=	main.c draw.c init.c mlx.c \
-				move.c parse.c raycast.c raycast_helper.c
+				move.c parse.c raycast.c raycast_helper.c \
+				textures.c fill_helper.c colors.c fill.c \
+				parse_util.c \
 
 LIBFTDIR	=	inc/libft
 GNLDIR		=	inc/gnl

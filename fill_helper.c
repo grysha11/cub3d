@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:26:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/29 18:29:16 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:16:42 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	trim_map(t_parse *parse)
 	int		len;
 	int		i;
 
-	len = find_map(parse) + 1;
+	len = find_str(parse->map);
 	res = malloc(sizeof(char *) * (matrix_len(parse->map + len) + 1));
 	i = 0;
 	while (parse->map[len] && ft_strncmp(parse->map[len],

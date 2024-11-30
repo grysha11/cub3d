@@ -1,9 +1,24 @@
 NO			inc/north.xpm
+
 EA		inc/east.xpm
+
+
+
+
+
+
+
 SO	inc/purplestone.xpm
+
+
+
+
 WE	inc/west.xpm
 
 C 255,0,255
+
+
+
 F 15,6,40
 
 111111111111111

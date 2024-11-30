@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/29 18:30:10 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:53:47 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,22 +119,6 @@ void	tab_trim(t_parse *parse)
 	parse->map = res;
 }
 
-int	find_map(t_parse *parse)
-{
-	int	i;
-
-	i = 0;
-	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
-		i++;
-	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
-		i++;
-	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) != 0)
-		i++;
-	while (parse->map[i] && ft_strncmp(parse->map[i], "\n", ft_strlen(parse->map[i])) == 0)
-		i++;
-	return (i - 1);
-}
-
 void	find_player(t_parse *parse)
 {
 	int	i;
@@ -142,7 +126,7 @@ void	find_player(t_parse *parse)
 	int	y;
 
 	y = 0;
-	i = find_map(parse);
+	i = 0;
 	while (parse->map[i])
 	{
 		j = 0;
@@ -196,3 +180,22 @@ bool	check_order(char **map)
 	}
 	return (true);
 }
+
+int	find_str(char **map)
+{
+	static int	i = 0;
+	int			res;
+
+	while (map[i] && ft_strncmp(map[i], "\n", ft_strlen(map[i])) == 0)
+		i++;
+	res = i;
+	i += 1;
+	return (res);
+}
+
+//TODO change the way I parse files:
+//because everything should be in particular order
+//I have to make the static char of the current string and skip all of the \n strings
+//using strncmp
+//I will have to redo a lot of shit 
+//damn

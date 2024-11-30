@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/27 16:00:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:25:16 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ bool	check_order(char **map);
 void	err_inc_parse(char *first_message);
 void	parse_textures(t_parse *parse);
 void	parse_colors(t_parse *parse);
-int		find_map(t_parse *parse);
 void	find_player(t_parse *parse);
 void	trim_map(t_parse *parse);
 int		matrix_len(char **matrix);
@@ -171,5 +170,10 @@ void	free_parse(t_parse *parse);
 void	init_flood(t_parse *parse);
 void	tab_trim(t_parse *parse);
 void	free_matrixx(char **matrix);
+int		find_str(char **map);
+char	**cpy_matrix(char **str);
+void	get_w_h(t_flood *flood, t_parse *parse);
+int		get_n_cords(char **map);
+void	get_cords(t_flood *flood, int size, char **map);
 
 #endif
