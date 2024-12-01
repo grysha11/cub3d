@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/01 17:48:24 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:33:55 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_parse(int ac, char **av, t_parse *parse)
 		exit(1);
 	}
 	trim_map(parse);
+	check_map_chars(parse);
 	find_player(parse);
 	init_flood(parse);
 }

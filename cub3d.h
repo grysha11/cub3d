@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/01 17:48:55 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:33:24 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,6 @@ char	**cpy_matrix(char **str);
 void	get_w_h(t_flood *flood, t_parse *parse);
 int		get_n_cords(char **map);
 void	get_cords(t_flood *flood, int size, char **map);
+void	check_map_chars(t_parse *parse);
 
 #endif

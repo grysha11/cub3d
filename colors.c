@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:24:25 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/01 17:26:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:11:17 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	create_rgb(int *rgb, t_parse *parse)
+int	create_rgb(int *rgb, t_parse *parse, char **str)
 {
 	if ((rgb[0] >= 0 && rgb[0] <= 255) && (rgb[1] >= 0 && rgb[1] <= 255)
 		&& (rgb[2] >= 0 && rgb[2] <= 255))
@@ -21,6 +21,7 @@ int	create_rgb(int *rgb, t_parse *parse)
 	{
 		err_inc_parse("Incorrect color values");
 		free_parse(parse);
+		free_matrixx(str);
 		exit(1);
 	}
 }
@@ -43,7 +44,7 @@ void	check_colors(char **str, t_parse *parse, int *dst)
 	colors[1] = ft_atoi(res[1]);
 	colors[2] = ft_atoi(res[2]);
 	free_matrixx(res);
-	*dst = create_rgb(colors, parse);
+	*dst = create_rgb(colors, parse, str);
 }
 
 void	take_colors(char **str, t_parse *parse)

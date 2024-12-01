@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:26:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/30 23:28:13 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:24:40 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	find_player(t_parse *parse)
 {
 	int	i;
 	int	j;
-	int	y;
 
-	y = 0;
 	i = 0;
 	while (parse->map[i])
 	{
@@ -31,11 +29,10 @@ void	find_player(t_parse *parse)
 				parse->dir = parse->map[i][j];
 				parse->map[i][j] = '0';
 				parse->x = (double)j;
-				parse->y = (double)y;
+				parse->y = (double)i;
 			}
 			j++;
 		}
-		y++;
 		i++;
 	}
 }
