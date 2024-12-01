@@ -8,14 +8,14 @@ EA		inc/east.xpm
 
 
 
-SO	inc/purplestone.xpm
+SO	inc/purplestone.xpmmm
 
 
 
 
 WE	                            inc/west.xpm
 
-C 255,0,255
+C 23,0,255
 
 
 

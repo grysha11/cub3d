@@ -3,35 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:23:14 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/30 23:25:34 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:38:22 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	check_extension_t(t_parse *parse, char **str, int i)
+{
+	char	*ext;
+
+	ext = ft_strdup(".xpm");
+	if (ft_strlen(str[1]) >= 4 && ft_strncmp(str[1] + ft_strlen(str[1]) - 4, ext, 4) == 0)
+	{
+		parse->textures[i] = ft_strdup(str[1]);
+		free(ext);
+	}
+	else
+	{
+		err_inc_parse("Incorrect extension of the texture file");
+		free(ext);
+		free_matrixx(str);
+		free_parse(parse);
+		exit(1);
+	}
+}
+
 void	take_texture(char **str, t_parse *parse)
 {
 	if (ft_strncmp(str[0], "NO", ft_strlen(str[0])) == 0)
 	{
-		parse->textures[NO] = ft_strdup(str[1]);
+		check_extension_t(parse, str, NO);
 		parse->no++;
 	}
 	else if (ft_strncmp(str[0], "SO", ft_strlen(str[0])) == 0)
 	{
-		parse->textures[SO] = ft_strdup(str[1]);
+		check_extension_t(parse, str, SO);
 		parse->so++;
 	}
 	else if (ft_strncmp(str[0], "WE", ft_strlen(str[0])) == 0)
 	{
-		parse->textures[WE] = ft_strdup(str[1]);
+		check_extension_t(parse, str, WE);
 		parse->we++;
 	}
 	else if (ft_strncmp(str[0], "EA", ft_strlen(str[0])) == 0)
 	{
-		parse->textures[EA] = ft_strdup(str[1]);
+		check_extension_t(parse, str, EA);
 		parse->ea++;
 	}
 	else
