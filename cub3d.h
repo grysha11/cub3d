@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/01 22:33:24 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 23:04:58 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,7 @@ void	get_w_h(t_flood *flood, t_parse *parse);
 int		get_n_cords(char **map);
 void	get_cords(t_flood *flood, int size, char **map);
 void	check_map_chars(t_parse *parse);
+void	check_count(t_parse *parse);
+bool	check_for_null(t_point *c, char **map);
 
 #endif
