@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:47:39 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/26 16:40:10 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:48:33 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,18 @@ void	set_up_player(t_struct *mlx)
 {
 	mlx->player_x = mlx->parse->x;
 	mlx->player_y = mlx->parse->y;
-	// mlx->player_x = SCREEN_X / 2;
-	// mlx->player_y = SCREEN_Y / 2;
 	mlx->player_orient = mlx->parse->dir;
 	if (mlx->player_orient == 'N' || mlx->player_orient == 'S')
 		set_n_or_s(mlx);
-	else if (mlx->player_orient == 'E' || mlx->player_orient == 'W')
+	else if (mlx->parse->dir == 'E' || mlx->parse->dir == 'W')
 		set_w_or_e(mlx);
-	mlx->move_speed = 0.1;
-	mlx->rotate_speed = 3;
+	mlx->move_speed = MOVE_SPEED;
+	mlx->rotate_speed = ROT_SPEED;
 	mlx->prev_x = SCREEN_X / 2;
+	mlx->key.backward = false;
+	mlx->key.forward = false;
+	mlx->key.left = false;
+	mlx->key.right = false;
+	mlx->key.r_left = false;
+	mlx->key.r_right = false;
 }

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 09:44:51 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/29 00:22:54 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,28 @@
 #include "./minilibx/mlx_int.h"
 #include "cub3d.h"
 
+int	render(t_struct *mlx)
+{
+	movement(mlx);
+	rotate(mlx);
+	clear_screen(mlx);
+	ray_cast(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+	return (0);
+}
+
 int	clean_exit(t_struct *mlx)
 {
-	mlx_destroy_image(mlx->mlx, mlx->img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[NO].img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[SO].img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[EA].img);
-	mlx_destroy_image(mlx->mlx, mlx->texture[WE].img);
+	if (mlx->img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->img);
+	if (mlx->texture[NO].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[NO].img);
+	if (mlx->texture[SO].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[SO].img);
+	if (mlx->texture[EA].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[EA].img);
+	if (mlx->texture[WE].img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->texture[WE].img);
 	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
@@ -28,32 +43,47 @@ int	clean_exit(t_struct *mlx)
 	exit(0);
 }
 
-int	event_handler(int keycode, t_struct *mlx)
+int	key_down(int keycode, t_struct *mlx)
 {
 	if (keycode == KEY_ESC)
 		clean_exit(mlx);
-	if (keycode == KEY_A || keycode == KEY_D
-		|| keycode == KEY_S || keycode == KEY_W)
-		movement(keycode, mlx);
-	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
-		rotate(keycode, mlx);
-	clear_screen(mlx);
-	ray_cast(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
+	if (keycode == KEY_W)
+		mlx->key.forward = true;
+	if (keycode == KEY_S)
+		mlx->key.backward = true;
+	if (keycode == KEY_A)
+		mlx->key.left = true;
+	if (keycode == KEY_D)
+		mlx->key.right = true;
+	if (keycode == KEY_LEFT)
+		mlx->key.r_left = true;
+	if (keycode == KEY_RIGHT)
+		mlx->key.r_right = true;
 	return (0);
 }
 
-int	mouse_move(int x, int y, t_struct *mlx)
+int	key_up(int keycode, t_struct *mlx)
 {
-	if (x < mlx->prev_x)
-		rotate(KEY_LEFT, mlx);
-	else
-		rotate(KEY_RIGHT, mlx);
-	mlx->prev_x = x;
-	clear_screen(mlx);
-	ray_cast(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img, 0, 0);
-	return (y - y);
+	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
+		|| keycode == KEY_D)
+	{
+		if (keycode == KEY_W)
+			mlx->key.forward = False;
+		if (keycode == KEY_S)
+			mlx->key.backward = False;
+		if (keycode == KEY_A)
+			mlx->key.left = False;
+		if (keycode == KEY_D)
+			mlx->key.right = False;
+	}
+	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	{
+		if (keycode == KEY_LEFT)
+			mlx->key.r_left = False;
+		if (keycode == KEY_RIGHT)
+			mlx->key.r_right = False;
+	}
+	return (0);
 }
 
 int	mlx_setup(t_struct *mlx)
@@ -65,8 +95,8 @@ int	mlx_setup(t_struct *mlx)
 	if (!mlx->mlx_win)
 		return (write(2, "Failed to create window!\n", 25), 1);
 	mlx_hook(mlx->mlx_win, 17, 1L << 17, clean_exit, mlx);
-	mlx_hook(mlx->mlx_win, 2, 1L << 0, event_handler, mlx);
-	// mlx_hook(mlx->mlx_win, 6, 1L << 6, mouse_move, mlx);
+	mlx_hook(mlx->mlx_win, 2, 1L << 0, key_down, mlx);
+	mlx_hook(mlx->mlx_win, 3, 1L << 1, key_up, mlx);
 	mlx->img = mlx_new_image(mlx->mlx, SCREEN_X, SCREEN_Y);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->b_p_p,
 			&mlx->line_length, &mlx->endian);

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:39:06 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 09:40:23 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/29 00:17:58 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	choose_img_side(t_ray *ray, t_struct *mlx)
 	else
 	{
 		if (ray->ray_dir_y < 0)
-			ray->t = mlx->texture[NO];
-		else
 			ray->t = mlx->texture[SO];
+		else
+			ray->t = mlx->texture[NO];
 	}
 }

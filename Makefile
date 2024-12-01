@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+         #
+#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/11/30 23:21:33 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/12/01 17:48:36 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
