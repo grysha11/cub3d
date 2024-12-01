@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:23:14 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/01 17:38:22 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:51:47 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	check_extension_t(t_parse *parse, char **str, int i)
 	char	*ext;
 
 	ext = ft_strdup(".xpm");
-	if (ft_strlen(str[1]) >= 4 && ft_strncmp(str[1] + ft_strlen(str[1]) - 4, ext, 4) == 0)
+	if (ft_strlen(str[1]) >= 4 && ft_strncmp(str[1]
+			+ ft_strlen(str[1]) - 4, ext, 4) == 0)
 	{
 		parse->textures[i] = ft_strdup(str[1]);
 		free(ext);
