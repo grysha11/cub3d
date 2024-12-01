@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/25 10:06:26 by atamas           ###   ########.fr       */
+/*   Updated: 2024/11/29 00:24:19 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	set_textures(t_struct *mlx, char **textures)
 			&mlx->texture[EA].width, &mlx->texture[EA].height);
 	if (mlx->texture[NO].img == NULL || mlx->texture[SO].img == NULL
 		|| mlx->texture[WE].img == NULL || mlx->texture[EA].img == NULL)
-		return (printf("One of the IMG returned NULL\n"),
-			free_parse(mlx->parse), exit(1));
+		return (printf("Error\nOne of the IMG returned NULL\n"),
+			clean_exit(mlx), exit(1));
 	mlx->texture[NO].addr = mlx_get_data_addr(mlx->texture[NO].img,
 			&mlx->texture[NO].b_p_p, &mlx->texture[NO].line_length,
 			&mlx->texture[NO].endian);
@@ -102,10 +102,7 @@ int	main(int ac, char **av)
 	if (mlx_setup(&mlx))
 		return (1);
 	set_textures(&mlx, parse->textures);
-	// print_parse(parse);
-	clear_screen(&mlx);
-	ray_cast(&mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
+	mlx_loop_hook(mlx.mlx, render, &mlx);
 	mlx_loop(mlx.mlx);
 	clean_exit(&mlx);
 	return (0);
