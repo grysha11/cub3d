@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:26:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/01 22:24:40 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:45:51 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,13 @@ void	get_w_h(t_flood *flood, t_parse *parse)
 	}
 	flood->size.x = w + 1;
 	flood->size.y = i;
+	if (w > 1024)
+	{
+		err_inc_parse("Map is too big");
+		free_matrixx(flood->map);
+		free_parse(parse);
+		exit(1);
+	}
 }
 
 int	get_n_cords(char **map)

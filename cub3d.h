@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/01 23:04:58 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:35:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define PI 3.141592
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.5
+# define MAP_MAX 1024
 
 # define COLOR "\033[0m"
 # define COLOR_RED "\033[1;31m"

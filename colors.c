@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:24:25 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/01 22:11:17 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:33:33 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,31 @@ int	create_rgb(int *rgb, t_parse *parse, char **str)
 	}
 }
 
+void	check_numeric(char **str, t_parse *parse, char **res)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (res[i][j])
+		{
+			if (!ft_isdigit(res[i][j]))
+			{
+				err_inc_parse("Non numeric value of RGB values");
+				free_matrixx(res);
+				free_matrixx(str);
+				free_parse(parse);
+				exit(1);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	check_colors(char **str, t_parse *parse, int *dst)
 {
 	char	**res;
@@ -40,6 +65,7 @@ void	check_colors(char **str, t_parse *parse, int *dst)
 		free_parse(parse);
 		exit(1);
 	}
+	check_numeric(str, parse, res);
 	colors[0] = ft_atoi(res[0]);
 	colors[1] = ft_atoi(res[1]);
 	colors[2] = ft_atoi(res[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/02 01:59:45 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:37:53 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void	init_parse(int ac, char **av, t_parse *parse)
 		exit(1);
 	}
 	trim_map(parse);
+	if (matrix_len(parse->map) > MAP_MAX)
+	{
+		err_inc_parse("Map is too big");
+		free_parse(parse);
+		exit(1);
+	}
 	check_map_chars(parse);
 	find_player(parse);
 	init_flood(parse);
