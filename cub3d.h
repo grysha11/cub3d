@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/28 20:26:57 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/02 18:28:23 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define PI 3.141592
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.5
+# define MAP_MAX 1024
 
 # define COLOR "\033[0m"
 # define COLOR_RED "\033[1;31m"
@@ -49,6 +50,20 @@ typedef enum e_texture
 	EA
 }	t_texture;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
+typedef struct s_flood
+{
+	t_point	cur;
+	t_point size;
+	char	**map;
+	t_point	*s_cord;
+}	t_flood;
+
 typedef struct s_parse
 {
 	char	**map;
@@ -58,6 +73,12 @@ typedef struct s_parse
 	char	*textures[10];
 	int		c_color;
 	int		f_color;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		c;
+	int		f;
 }	t_parse;
 
 typedef struct s_textures
@@ -144,14 +165,25 @@ void			choose_img_side(t_ray *ray, t_struct *mlx);
 int				render(t_struct *mlx);
 
 //parsing functions
-void			parse_file(char **av, t_parse *parse);
-void			check_files(char **av, int ac, t_parse *parse);
-void			err_inc_parse(char *first_message);
-void			parse_textures(t_parse *parse);
-void			parse_colors(t_parse *parse);
-int				find_map(t_parse *parse);
-void			find_player(t_parse *parse);
-void			trim_map(t_parse *parse);
-void			free_parse(t_parse *parse);
+void	parse_file(char **av, t_parse *parse);
+void	check_files(char **av, int ac, t_parse *parse);
+void	err_inc_parse(char *first_message);
+void	parse_textures(t_parse *parse);
+void	parse_colors(t_parse *parse);
+void	find_player(t_parse *parse);
+void	trim_map(t_parse *parse);
+int		matrix_len(char **matrix);
+void	free_parse(t_parse *parse);
+void	init_flood(t_parse *parse);
+void	tab_trim(t_parse *parse);
+void	free_matrixx(char **matrix);
+int		find_str(char **map);
+char	**cpy_matrix(char **str);
+void	get_w_h(t_flood *flood, t_parse *parse);
+int		get_n_cords(char **map);
+void	get_cords(t_flood *flood, int size, char **map);
+void	check_map_chars(t_parse *parse);
+void	check_count(t_parse *parse);
+bool	check_for_null(t_point *c, char **map);
 
 #endif

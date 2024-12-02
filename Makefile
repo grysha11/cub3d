@@ -3,15 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/11/28 13:44:22 by atamas           ###   ########.fr        #
+#    Updated: 2024/12/01 23:03:46 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		=	main.c draw.c init.c mlx.c \
-				move.c parse.c raycast.c raycast_helper.c
+				move.c parse.c raycast.c raycast_helper.c \
+				textures.c fill_helper.c colors.c fill.c \
+				parse_util.c checkers.c\
 
 LIBFTDIR	=	inc/libft
 GNLDIR		=	inc/gnl
@@ -23,7 +25,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 CC			=	@cc
 RM			=	@rm -f
-CCFLAGS		=	-Wall -Werror -Wextra -Iinclude/mlx
+CCFLAGS		=	-Wall -Werror -Wextra -Iinclude/mlx -g
 MLXFLAGS	=	-L/usr/X11/lib -lX11 -lXext -Llibs/mlx_linux -lm
 
 BLUE		=	\033[0;94m

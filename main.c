@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/29 00:24:19 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/02 17:01:10 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,25 @@ void	init_parse(int ac, char **av, t_parse *parse)
 {
 	check_files(av, ac, parse);
 	parse_file(av, parse);
+	tab_trim(parse);
 	parse_textures(parse);
 	parse_colors(parse);
-	find_player(parse);
+	if (parse->c != 1 || parse->f != 1)
+	{
+		err_inc_parse("Incorrect amount of colors");
+		free_parse(parse);
+		exit(1);
+	}
 	trim_map(parse);
+	if (matrix_len(parse->map) > MAP_MAX)
+	{
+		err_inc_parse("Map is too big");
+		free_parse(parse);
+		exit(1);
+	}
+	check_map_chars(parse);
+	find_player(parse);
+	init_flood(parse);
 }
 
 void	free_parse(t_parse *parse)
@@ -40,9 +55,10 @@ void	free_parse(t_parse *parse)
 			free(parse->map);
 		}
 		i = 0;
-		while (parse->textures[i])
+		while (i < 4)
 		{
-			free(parse->textures[i]);
+			if (parse->textures[i])
+				free(parse->textures[i]);
 			i++;
 		}
 	}
@@ -98,7 +114,6 @@ int	main(int ac, char **av)
 	mlx.parse = parse;
 	init_parse(ac, av, parse);
 	set_up_player(&mlx);
-	print_parse(parse);
 	if (mlx_setup(&mlx))
 		return (1);
 	set_textures(&mlx, parse->textures);
