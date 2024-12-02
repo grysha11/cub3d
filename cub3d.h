@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/02 16:59:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:28:23 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
-# include "./minilibx/mlx.h"
-# include "inc/gnl/gnl.h"
-# include "inc/libft/libft.h"
 # include "./minilibx/mlx.h"
 # include "inc/gnl/gnl.h"
 # include "inc/libft/libft.h"
