@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/02 16:59:37 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:04:13 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	parse_file(char **av, t_parse *parse)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 	{
+		free_parse(parse);
 		err_inc_parse("Could't open the .cub file");
 		exit(1);
 	}
@@ -52,6 +53,7 @@ void	parse_file(char **av, t_parse *parse)
 	if (!parse->map)
 	{
 		close(fd);
+		free_parse(parse);
 		err_inc_parse("Could't read the .cub file");
 		exit(1);
 	}
