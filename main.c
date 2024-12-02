@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/02 15:37:53 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:01:10 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	init_parse(int ac, char **av, t_parse *parse)
 {
-	check_files(av, ac);
+	check_files(av, ac, parse);
 	parse_file(av, parse);
 	tab_trim(parse);
 	parse_textures(parse);
@@ -120,6 +120,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(mlx.mlx, render, &mlx);
 	mlx_loop(mlx.mlx);
 	clean_exit(&mlx);
-	free_parse(parse);
 	return (0);
 }

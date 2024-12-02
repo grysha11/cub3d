@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/11/30 23:28:23 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:59:37 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_files(char **av, int ac)
+void	check_files(char **av, int ac, t_parse *parse)
 {
 	char	*ext;
 
 	if (ac != 2)
 	{
 		err_inc_parse("Incorrect amount of arguments");
+		free_parse(parse);
 		exit(1);
 	}
 	ext = ft_strdup(".cub");
@@ -32,6 +33,7 @@ void	check_files(char **av, int ac)
 	{
 		free(ext);
 		err_inc_parse("Incorrect extension of the file");
+		free_parse(parse);
 		exit(1);
 	}
 }

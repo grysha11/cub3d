@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/02 15:35:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:59:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ int				render(t_struct *mlx);
 
 //parsing functions
 void	parse_file(char **av, t_parse *parse);
-void	check_files(char **av, int ac);
+void	check_files(char **av, int ac, t_parse *parse);
 void	err_inc_parse(char *first_message);
 void	parse_textures(t_parse *parse);
 void	parse_colors(t_parse *parse);
