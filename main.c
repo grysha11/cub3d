@@ -6,7 +6,7 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/01 22:33:55 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/02 01:59:45 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ void	free_parse(t_parse *parse)
 			free(parse->map);
 		}
 		i = 0;
-		while (parse->textures[i])
+		while (i < 4)
 		{
-			free(parse->textures[i]);
+			if (parse->textures[i])
+				free(parse->textures[i]);
 			i++;
 		}
 	}
