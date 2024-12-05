@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/29 00:22:54 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/05 12:33:33 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,20 @@ int	key_up(int keycode, t_struct *mlx)
 		|| keycode == KEY_D)
 	{
 		if (keycode == KEY_W)
-			mlx->key.forward = False;
+			mlx->key.forward = false;
 		if (keycode == KEY_S)
-			mlx->key.backward = False;
+			mlx->key.backward = false;
 		if (keycode == KEY_A)
-			mlx->key.left = False;
+			mlx->key.left = false;
 		if (keycode == KEY_D)
-			mlx->key.right = False;
+			mlx->key.right = false;
 	}
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 	{
 		if (keycode == KEY_LEFT)
-			mlx->key.r_left = False;
+			mlx->key.r_left = false;
 		if (keycode == KEY_RIGHT)
-			mlx->key.r_right = False;
+			mlx->key.r_right = false;
 	}
 	return (0);
 }

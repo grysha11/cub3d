@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:44:24 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/28 20:27:04 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/05 12:32:48 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,42 +50,3 @@ void	clear_screen(t_struct *mlx)
 		i++;
 	}
 }
-
-// void	draw_square(int size, int x, int y, int color, t_struct *game)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < size)
-// 		my_mlx_pixel_put(game, x + i++, y, color);
-// 	i = 0;
-// 	while (i < size)
-// 		my_mlx_pixel_put(game, x, y + i++, color);
-// 	i = 0;
-// 	while (i < size)
-// 		my_mlx_pixel_put(game, x + size, y + i++, color);
-// 	i = 0;
-// 	while (i < size)
-// 		my_mlx_pixel_put(game, x + i++, y + size, color);
-// }
-
-// void	draw_map(t_struct *mlx)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = 0;
-// 	y = 0;
-// 	while (mlx->parse->map[y])
-// 	{
-// 		x = 0;
-// 		while (mlx->parse->map[y][x])
-// 		{
-// 			if (mlx->parse->map[y][x] == '1')
-// 				draw_square(32, (x + 1) * BLOCK_SIZE, (y + 1) * BLOCK_SIZE,
-// 					RED, mlx);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }

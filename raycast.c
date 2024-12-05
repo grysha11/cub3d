@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:59:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/01 17:48:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:26:27 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	put_walls(t_ray *ray, t_struct *mlx, int x)
 	tex_pos = (ray->draw_start - SCREEN_Y / 2 + ray->line_height / 2) * step;
 	while (ray->draw_start < ray->draw_end)
 	{
-		tex_y = (int)tex_pos & (ray->t.height - 1);
+		tex_y = (int)tex_pos;
 		tex_pos += step;
 		ray->p_color = my_mlx_pixel_get(&ray->t, tex_x, tex_y);
 		my_mlx_pixel_put(mlx, x, ray->draw_start, ray->p_color);

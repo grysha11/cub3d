@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:24:25 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/02 15:33:33 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:33:00 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,3 @@ void	parse_colors(t_parse *parse)
 		count++;
 	}
 }
-
-//find one possible problem with the parsing
-//cases like: C 23 , 0,           255
-//are not working
-//I'm not sure if it is a mistake which I need to fix
-//There is a possible way to fix it 
-//Using the pointer to the first appearance to the number
-//With ft_strchr() function and the triming all of the spaces
-//With ft_strtrim() funciton
