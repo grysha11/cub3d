@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/02 17:01:10 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:34:24 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,6 @@ void	free_parse(t_parse *parse)
 		}
 	}
 	free(parse);
-}
-
-void	print_parse(t_parse *parse)
-{
-	printf("MAP: \n");
-	for (int i = 0; parse->map[i]; i++)
-		printf("%s\n", parse->map[i]);
-	printf("TEXTURE PATHES: \n");
-	for (int i = 0; parse->textures[i]; i++)
-		printf("%s\n", parse->textures[i]);
-	printf("FLOOR COLOR: \n%d\n", parse->f_color);
-	printf("CEELING COLOR: \n%d\n", parse->c_color);
 }
 
 void	set_textures(t_struct *mlx, char **textures)
