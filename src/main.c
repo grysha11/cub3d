@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:21:37 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/05 12:34:24 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/05 12:56:44 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "./minilibx/mlx.h"
+#include "../inc/minilibx/mlx.h"
 
 void	init_parse(int ac, char **av, t_parse *parse)
 {
@@ -110,3 +110,7 @@ int	main(int ac, char **av)
 	clean_exit(&mlx);
 	return (0);
 }
+
+
+// ADD A NEW LINE CHECKER IN PLAYER COUNT
+//FIX STRNCMP IN TEXTURES

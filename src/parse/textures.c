@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:23:14 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/02 01:54:19 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:58:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	check_extension_t(t_parse *parse, char **str, int i)
 {
@@ -35,22 +35,22 @@ void	check_extension_t(t_parse *parse, char **str, int i)
 
 void	take_texture(char **str, t_parse *parse)
 {
-	if (ft_strncmp(str[0], "NO", ft_strlen(str[0])) == 0)
+	if (ft_strncmp(str[0], "NO", ft_strlen(str[0]) + 1) == 0)
 	{
 		check_extension_t(parse, str, NO);
 		parse->no++;
 	}
-	else if (ft_strncmp(str[0], "SO", ft_strlen(str[0])) == 0)
+	else if (ft_strncmp(str[0], "SO", ft_strlen(str[0]) + 1) == 0)
 	{
 		check_extension_t(parse, str, SO);
 		parse->so++;
 	}
-	else if (ft_strncmp(str[0], "WE", ft_strlen(str[0])) == 0)
+	else if (ft_strncmp(str[0], "WE", ft_strlen(str[0]) + 1) == 0)
 	{
 		check_extension_t(parse, str, WE);
 		parse->we++;
 	}
-	else if (ft_strncmp(str[0], "EA", ft_strlen(str[0])) == 0)
+	else if (ft_strncmp(str[0], "EA", ft_strlen(str[0]) + 1) == 0)
 	{
 		check_extension_t(parse, str, EA);
 		parse->ea++;

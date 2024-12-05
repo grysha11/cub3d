@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/02 18:28:23 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/05 13:13:01 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
-# include "./minilibx/mlx.h"
-# include "inc/gnl/gnl.h"
-# include "inc/libft/libft.h"
+# include "../inc/minilibx/mlx.h"
+# include "../inc/gnl/gnl.h"
+# include "../inc/libft/libft.h"
 
 # define SCREEN_X 1024
 # define SCREEN_Y 720
@@ -185,5 +185,6 @@ void	get_cords(t_flood *flood, int size, char **map);
 void	check_map_chars(t_parse *parse);
 void	check_count(t_parse *parse);
 bool	check_for_null(t_point *c, char **map);
+void	trim_spaces(int start, t_parse *parse);
 
 #endif

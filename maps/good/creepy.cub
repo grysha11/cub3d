@@ -1,23 +1,23 @@
-NO			inc/north.xpm
+NO			inc/textures/north.xpm
 
-EA		inc/east.xpm
-
-
+EA		inc/textures/east.xpm
 
 
 
 
 
-SO	inc/purplestone.xpm
+
+
+SO	inc/textures/purplestone.xpm
 
 
 
 
-WE	                            inc/west.xpm
-
-C 0,0,0
+WE	                            inc/textures/west.xpm
 
 
+
+C  2 55,2 55,255
 
 F 0,0,0
 

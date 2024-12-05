@@ -6,11 +6,11 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:26:07 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/02 15:45:51 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:45:44 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	find_player(t_parse *parse)
 {
