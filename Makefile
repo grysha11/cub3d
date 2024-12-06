@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+         #
+#    By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/12/06 19:15:08 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/12/06 23:35:05 by atamas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ EXEC		=	$(EXECDIR)/checkers.c $(EXECDIR)/draw.c $(EXECDIR)/init.c \
 
 PARSE		=	$(PARSEDIR)/n_color.c $(PARSEDIR)/fill_helper.c $(PARSEDIR)/fill.c \
 				$(PARSEDIR)/parse_util.c $(PARSEDIR)/parse.c $(PARSEDIR)/textures.c \
-				$(PARSEDIR)/colors.c \
+				$(PARSEDIR)/color_util.c \
 
 SRCS		=	$(SRCSDIR)/main.c $(EXEC) $(PARSE) \
 
