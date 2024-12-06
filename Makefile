@@ -6,18 +6,26 @@
 #    By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 16:00:05 by hzakharc          #+#    #+#              #
-#    Updated: 2024/12/01 23:03:46 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/12/06 11:26:12 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=	main.c draw.c init.c mlx.c \
-				move.c parse.c raycast.c raycast_helper.c \
-				textures.c fill_helper.c colors.c fill.c \
-				parse_util.c checkers.c\
+EXECDIR		=	src/execution
+PARSEDIR	=	src/parse
+SRCSDIR		=	src
+
+EXEC		=	$(EXECDIR)/checkers.c $(EXECDIR)/draw.c $(EXECDIR)/init.c \
+				$(EXECDIR)/mlx.c $(EXECDIR)/move.c $(EXECDIR)/raycast_helper.c \
+				$(EXECDIR)/raycast.c \
+
+PARSE		=	$(PARSEDIR)/colors.c $(PARSEDIR)/fill_helper.c $(PARSEDIR)/fill.c \
+				$(PARSEDIR)/parse_util.c $(PARSEDIR)/parse.c $(PARSEDIR)/textures.c \
+
+SRCS		=	$(SRCSDIR)/main.c $(EXEC) $(PARSE) \
 
 LIBFTDIR	=	inc/libft
 GNLDIR		=	inc/gnl
-MLXDIR		=	minilibx
+MLXDIR		=	inc/minilibx
 
 LIBS		=	$(GNLDIR)/gnl.a $(LIBFTDIR)/libft.a $(MLXDIR)/libmlx.a
 
