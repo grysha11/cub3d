@@ -6,11 +6,11 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:23:14 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/02 01:54:19 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:25:40 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	check_extension_t(t_parse *parse, char **str, int i)
 {

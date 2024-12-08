@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:39:06 by atamas            #+#    #+#             */
-/*   Updated: 2024/11/29 00:17:58 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/06 11:25:11 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	line_height(t_ray *ray)
 {

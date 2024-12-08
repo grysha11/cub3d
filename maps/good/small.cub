@@ -1,0 +1,18 @@
+EA inc/east.xpm
+
+NO inc/north.xpm
+
+SO inc/south.xpm
+
+WE inc/west.xpm
+
+C 0,  255,		0
+F 0, 0 ,0
+
+1111
+11S1		11111
+1111
+		1
+111			111
+111			1011
+111			 111

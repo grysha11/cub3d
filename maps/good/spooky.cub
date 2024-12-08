@@ -1,7 +1,7 @@
-NO inc/north.xpm
-EA inc/east.xpm
-SO inc/purplestone.xpm
-WE inc/west.xpm
+NO inc/krobus.xpm
+EA inc/skeletons.xpm
+SO inc/bats.xpm
+WE inc/goomba.xpm
 
 C 135,206,235
 F 15,6,40
