@@ -6,11 +6,11 @@
 /*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:17:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/01 23:02:35 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:25:27 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 bool	neighbour(char **map, t_point size, t_point start)
 {

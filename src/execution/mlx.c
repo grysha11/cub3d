@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 08:30:15 by atamas            #+#    #+#             */
-/*   Updated: 2024/12/05 12:33:33 by atamas           ###   ########.fr       */
+/*   Updated: 2024/12/06 11:25:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx/mlx.h"
-#include "./minilibx/mlx_int.h"
-#include "cub3d.h"
+#include "../../inc/minilibx/mlx.h"
+#include "../../inc/minilibx/mlx_int.h"
+#include "../cub3d.h"
 
 int	render(t_struct *mlx)
 {
