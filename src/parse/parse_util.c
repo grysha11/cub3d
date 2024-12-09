@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc <hzakharc@student.42wolfsburg>    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 18:17:33 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/12/06 11:25:31 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:37:54 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	matrix_len(char **matrix)
 	int	i;
 
 	i = 0;
+	if (!matrix)
+		return (-1);
 	while (matrix[i])
 		i++;
 	return (i);
