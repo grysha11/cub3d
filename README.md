@@ -4,10 +4,7 @@ cub3d is a 3D game project built using the MinilibX library. It is a simple rayc
 
 ## Gameplay video
 
-<video width="600" controls>
-  <source src="./video/gameplay.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video>
+![Gameplay video](./video/gameplay.gif)
 
 ## Requirements
 
